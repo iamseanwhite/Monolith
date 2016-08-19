@@ -1,0 +1,28 @@
+.turret {
+	background-repeat: no-repeat;
+	
+	background-image: url("../img/fa-crosshairs.svg");
+	/*
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='120px'><text x='0' y='15' font-size='1em'>^</text></svg>");
+	background-image: url('data:image/svg+xml;utf8,<svg viewBox="-50 -50 100 100" preserveAspectRatio="xMidYMid meet"><text font-size="16" dy=".3em" >I’m also resizeable!</text></svg>');
+	
+	font-size: 3em;
+	line-height: 1em;
+	*/
+}
+
+.turret:after {
+	/*
+	content: "^";
+	font-size: 3em;
+	*/
+	/* background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='120px'><text x='0' y='15' fill='red' font-size='20'>I love SVG!</text></svg>"); */
+}
+
+.mcfattys:before {
+	content: 'M';
+}
+
+.struts:before {
+	content: 'I';
+}

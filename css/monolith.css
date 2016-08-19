@@ -1,0 +1,136 @@
+:root {
+  --main-fg-color: #05668D;
+  --main-bg-color: #CEBD9A;
+  
+  --enemy-color: #C92E2C;
+  /* others: 56153D, 028090,00A896,02C39A */
+  --ui-opacity: .85;
+  --monolith-opacity: .42;
+  
+  --block-size: 64px;
+  --main-bg-color-rgba: rgba(206, 189, 154, var(--ui-opacity));
+}
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 10% 100%; }
+}
+
+* {
+	/* font-family: Gotham, Georgia; */
+	font-family: Georgia; 
+}
+
+body, html, #main, #message-overlay {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+	/* https://codepen.io/saransh/pen/BKJun */
+	background-image: url('../img/stardust.png');
+	background-repeat: repeat;
+	/* TODO: Disable this on battery operated devices I guess ... seems to be CPU intensive */
+	/* animation: animatedBackground 80s linear infinite; */
+	
+	overflow: hidden;
+	perspective: 3000;
+}
+
+#main, #message-overlay {		
+    display: table;
+}
+
+#main {
+	z-index: 5;
+}
+
+#wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    text-align:center;
+}
+
+.monolith-floor .row, #ui-map .row {
+    margin-bottom: -9px; /* TODO: Fix this ... */
+}
+
+.monolith-floor .col, #ui-map .fa {
+	display: inline-block;
+	border: 1px solid #666;
+	width: var(--block-size);
+	height: var(--block-size);
+	background-color: rgba(255, 255, 255, var(--monolith-opacity));
+	transition: all .2s ease-in-out;
+	
+	vertical-align: text-bottom;
+    margin-bottom: 3px;
+    font-size: 3em;
+    text-align: center;	
+}
+
+#ui-map .fa {
+	padding: 0;
+	margin: 0;
+}
+
+.monolith-floor {
+    transform: rotateX(45deg) rotateZ(45deg);
+}
+
+.monolith-floor .col:before {
+	vertical-align: middle;
+}
+
+.monolith-floor .row:first-child .col:first-child {	
+    border-top-left-radius: 2em;
+}
+
+.monolith-floor .row:first-child .col:last-child {	
+    border-top-right-radius: 2em;
+}
+
+.monolith-floor .row:last-child .col:first-child {	
+    border-bottom-left-radius: 2em;
+}
+
+.monolith-floor .row:last-child .col:last-child {	
+    border-bottom-right-radius: 2em;
+}
+
+#monolith .col:hover, #monolith .col.active {
+	border: 1px solid var(--main-fg-color);
+	/* TODO: Add 'glow' shadow */
+	z-index: 9;
+}
+
+#monolith .col:hover { 
+	transform: scale(1.1);
+}
+
+#monolith .col.flip-vertical:hover { 
+	transform: rotateZ(180deg) scale(1.1);
+}
+
+#newFloor .col {
+	background-color: white;
+	opacity: 0;
+}
+
+.col.fa-stack .fa {
+	line-height: 1.2em;
+}
+
+.col .fa.Bunk.Beds {
+	line-height: 2em;
+}
+
+#message-overlay {
+	position: absolute;
+	z-index: -5;
+}
+
+#message-overlay div {
+	text-align: center;
+    display: table-cell;
+}

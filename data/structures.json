@@ -1,0 +1,12 @@
+[
+   {
+      "turret":{
+         "class":"fa-crosshairs",
+         "description":"Shooty",
+         "upgrades":[
+            "range",
+            "firing speed"
+         ]
+      }
+   }
+]

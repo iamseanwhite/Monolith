@@ -1,0 +1,138 @@
+#ui-map .fa {	
+    transform: rotateX(60deg) rotateZ(45deg);
+}
+
+/* TODO: Check on deleting this */
+.flip-vertical {
+	transform: rotateZ(180deg);
+}
+
+#ui-variables {
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: var(--main-bg-color);
+	/* background-color: var(--main-bg-color); */
+	opacity: var(--ui-opacity);
+}
+
+#ui-variables div {
+	display: inline-block;
+	padding: 2px;
+	margin: 2px;	
+}
+
+#ui-variables div , #ui-variables i {
+	
+	text-shadow: 2px 2px 0px black;	
+}
+
+.menu {	
+	display: inline-block;
+	text-align: center;
+	max-width: 50%;
+	min-width: calc(var(--block-size) * 4.2);
+	background-color: var(--main-bg-color-rgba);
+	color: var(--main-fg-color);
+	border-radius: 4px;
+	border: 1px dashed var(--main-bg-color-rgba);
+	/* background-color: rgba(255, 255, 255, var(--ui-opacity)); */
+	
+	position: absolute;
+	left: 100%;	
+	top: 50%;
+	z-index: 5;
+	
+	transition: transform 1s; 
+	/* TODO: Make description height kind of fixed for minimum description, and flex to height change ... */
+}
+
+.description:before {
+	font-weight: bold;
+}
+
+.menu .fa {
+	margin: 8px;
+	cursor: pointer;
+	
+    font-size: 3em;
+    /* padding: 4px; */
+}
+
+.menu .disabled {
+	
+	color: gray;
+	cursor: not-allowed;
+}
+
+#btn-reset-monolith-rotation {
+	position: absolute;
+	bottom: 32px;
+	display: none;
+	z-index: 5;
+}
+
+#ui-variables .fa {
+	font-size: 1.3em;
+}
+
+#ui-map {
+	position: absolute;
+	left: 0px;
+	top: 50%;
+	background: none;
+	border: none;
+	display: none;
+	
+	min-width: calc(var(--block-size) * 2);
+}
+
+#ui-map .row:not(:first-child) {
+	margin-top: calc(var(--block-size) * -.65);
+}
+
+#ui-map .fa {
+	border: 1px solid black;
+}
+
+#ui-map .currentFloor {
+	background-color: var(--main-bg-color);
+	transition: background-color 1s ease-in-out;
+}
+
+#ui-build-menu div {
+	cursor: pointer;
+}
+
+.menu :not(#lab-research) .fa:not(:first-child) {
+	font-size: 1.5em;
+}
+
+.menu:not(#ui-map) div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#message-overlay h1 {
+	color: black;
+	font-family: "Century Gothic";
+    font-size: 5.5em;
+	font-variant: small-caps;
+    opacity: 0;
+	
+	text-shadow: 0 1px 0 rgb(51, 51, 51), 0 2px 0 rgb(54, 54, 54), 0 3px 0 rgb(68, 68, 68), 0 4px 0 rgb(70, 70, 70), 0 5px 0 rgb(85, 85, 85), 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+	transition: 1s font ease-in-out, 2s opacity linear;
+}
+
+#message-overlay .hint {
+	
+	background-color: var(--main-bg-color);	
+	color: var(--main-fg-color);
+    font-size: 2em;
+    padding: 8px 14px 12px 14px;
+    border-radius: 15px;
+    vertical-align: top;
+    opacity: 0;
+	
+	transition: 2s opacity linear;
+}

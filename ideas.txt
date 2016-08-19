@@ -1,0 +1,9 @@
+Achievements:
+Shooty McShootFace : have a turret with 100+ kills
+Slaughter: Have over 1000 total kills
+
+Maybe rather than turrets have farms ... point is to create sustainable humanity?
+
+Library: Speeds up labs
+	Can only be built adjacent to existing libraries
+	Libraries are gifted randomly by "dignitaries" at milestones

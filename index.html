@@ -1,0 +1,71 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Monolith</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/monolith.css">
+        <link rel="stylesheet" href="css/structures.css">
+        <link rel="stylesheet" href="css/ui.css">
+        <link rel="stylesheet" href="css/dataURIs.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+		
+		<!-- TODO: Hamburger menu (with settings), top left -->
+	
+		<div id="ui-variables"></div>
+		<div class="menu" id="ui-block-detail">
+			<div class="description"></div>
+		</div>
+		<div class="menu" id="ui-build-menu">
+			<div class="description"></div>
+		</div>
+		<div class="menu" id="ui-map"></div>
+		<div id="message-overlay">
+			<div class="ui-message"></div>
+		</div>
+		<div id="main">
+		
+			<div id="wrapper">
+				<div id="monolith" class="monolith-floor"></div>
+				
+				<a id="btn-reset-monolith-rotation" class="btn" href="#">
+					<i class="fa fa-undo" aria-hidden="true"></i>
+				</a>
+			</div>
+		</div>
+
+		<!--
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		-->
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="js/main.js"></script>
+        <script src="data/structures.js"></script>
+        <script src="js/floors.js"></script>
+        <script src="js/currencies.js"></script>
+        <script src="js/ui.js"></script>
+        <script src="js/menu.js"></script>
+        <script src="js/menu2.js"></script>
+        <script src="js/dataLoad.js"></script>
+        <script src="js/ui-messages.js"></script>
+        <script src="js/persistence.js"></script>
+        <script src="js/game-start.js"></script>
+    </body>
+</html>
+
+<!-- 
+	Cookie clicker style: Player is humanity's vangard, cash for each kill. Monsters rush past player (toward humanity)
+	
+	Builder sim style: Rewards are for construction primarily ... (not really enough multiple things for player to do ...)
+	
+	TD style: Monsters attack player and can damage structure. Breach = game over. Persist research.
+-->
