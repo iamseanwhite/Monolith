@@ -69,18 +69,18 @@ var towerUpgrades = [
 		"name" : "McFattys",
 		"ui-class" : "mcfattys",
 		"description" : "Install a McFattys in your Monolith to widen the tower!",
-		"research" : "50"
+		"population" : "50"
 	},	
 	{
 		"name" : "Struts",
 		"ui-class" : "struts",
 		"description" : "Throw some supports under your tower to allow it to increase in size.",
-		"research" : "50"
+		"population" : "150"
 	},
 	{
 		"name" : "Anchors",
 		"ui-class" : "anchors fa-anchor",
 		"description" : "Install cables to anchor your tower to allow stable growth to greater heights.",
-		"research" : "100"
+		"population" : "500"
 	}
 ]

@@ -1,3 +1,6 @@
+var structureShadowStyle = document.createElement("style");
+document.head.appendChild(structureShadowStyle);
+
 function addMenu(menuId) {
 	
 	jQuery("body").prepend('<div class="menu" id="' + menuId + '"><div class="description"></div></div>');
@@ -12,6 +15,7 @@ jQuery("#ui-variables").click(function() {
 	openMenu("#lab-research");
 });
 
+// TODO: Refactor ... somehow
 function addItemToResearchMenu(itemClass, itemName, itemDescription) {
 	
 	var menu = "#lab-research";
@@ -36,7 +40,7 @@ function researchMenuItemClick(itemName) {
 	
 	removeFromResearchMenu(structure["ui-class"]);
 
-	closeMenus();
+	Monolith.UI.CloseMenus();
 }
 
 function removeFromResearchMenu(itemClass) {
@@ -44,4 +48,27 @@ function removeFromResearchMenu(itemClass) {
 	itemClass = itemClass.replaceAll(" ", ".");
 	
 	jQuery("#lab-research ." + itemClass).remove();
+}
+
+Monolith.UI.DisableUnresearchableResearch = function() {
+	
+	for(var structureName in Monolith.Structures) {
+		
+		var structure = Monolith.Structures[structureName];
+		
+		// TODO: Test if we can do .menu instead of specifying the menu
+		if(Monolith.Player.Resources.Research < structure.research) jQuery("#lab-research ." + structure.name).addClass("disabled");
+		else jQuery("#lab-research ." + structure.name).removeClass("disabled");
+	}	
+}
+
+Monolith.UI.DisableUnupgradeableUpgades = function() {
+	
+	for(var towerUpgradeName in Monolith.TowerUpgrades) {
+		
+		var towerUpgrade = Monolith.TowerUpgrades[towerUpgradeName];
+		
+		if(Monolith.Player.Resources.Population < towerUpgrade.population) jQuery("#tower-upgrades ." + towerUpgrade.name).addClass("disabled");
+		else jQuery("#tower-upgrades ." + towerUpgrade.name).removeClass("disabled");
+	}	
 }

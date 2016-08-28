@@ -15,7 +15,7 @@ var popPerHabitat = 10;
 
 Monolith.Player.Resources.CalculatePopulation = function() {
 	
-	var maxPop = (jQuery("#monolith .col .Habitat").size() * popPerHabitat) + (jQuery("#monolith .col .Bunk.Beds").size() * popPerHabitat);
+	var maxPop = (Monolith.GetStructureCount("Habitat") * popPerHabitat) + (Monolith.GetStructureCount("Bunk Beds") * popPerHabitat);
 	if(Monolith.Player.Resources.Population < maxPop) Monolith.Player.Resources.Population = Monolith.Player.Resources.Population + 1;
 	if (Monolith.Player.Resources.Population > maxPop) Monolith.Player.Resources.Population = maxPop;
 	
@@ -28,11 +28,19 @@ Monolith.Player.Resources.CalculateMaterials = function() {
 	Monolith.UI.SetUIVariable("Materials", Monolith.Player.Resources.Materials);
 }
 
+var promptedYet = false;
 Monolith.Player.Resources.CalculateResearch = function() {
 	
-	// TODO: Derive this from Monolith.Floors
-	Monolith.Player.Resources.Research = Monolith.Player.Resources.Research + jQuery("#monolith .col .Lab").size();
+	Monolith.Player.Resources.Research = Monolith.Player.Resources.Research + Monolith.GetStructureCount("Lab");
 	Monolith.UI.SetUIVariable("Research", Monolith.Player.Resources.Research);
+	
+	// TODO: And there's things that can be researched ... 
+	// TODO: We want to remind them each time a new research unlocks, and then periodically if all researches are unlocked. Maybe glow brighter for more research?
+	if(Monolith.Player.Resources.Research >= 10 && !promptedYet) {
+		
+		promptedYet = true;
+		Monolith.UI.HighlightMenuItem(jQuery("#ui-variables .Research"));
+	}
 }
 
 Monolith.PayResource = function(resource, amount) {

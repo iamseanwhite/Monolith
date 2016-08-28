@@ -60,3 +60,29 @@ Monolith.UI.HighlightElement = function(element) {
 		}, (iteration * 2000) + 1000);
 	}
 }
+
+Monolith.UI.HighlightMenuItem = function(menuItem) { 
+	
+	// jQuery(menuItem).css("textShadow", "3px 3px 1px white;");
+	jQuery(menuItem).toggleClass("highlightUIItem");
+	
+	setTimeout(function() {
+		jQuery(menuItem).toggleClass("highlightUIItem");
+	}, 1000);
+	
+	setTimeout(function() {
+		jQuery(menuItem).toggleClass("highlightUIItem");
+	}, 1900);
+	
+	setTimeout(function() {
+		jQuery(menuItem).toggleClass("highlightUIItem");
+	}, 2700);
+	
+	setTimeout(function() {
+		jQuery(menuItem).toggleClass("highlightUIItem");
+	}, 3500);
+	
+	setTimeout(function() {
+		jQuery(menuItem).toggleClass("highlightUIItem");
+	}, 4200);
+}

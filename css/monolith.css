@@ -11,11 +11,6 @@
   --main-bg-color-rgba: rgba(206, 189, 154, var(--ui-opacity));
 }
 
-@keyframes animatedBackground {
-	from { background-position: 0 0; }
-	to { background-position: 10% 100%; }
-}
-
 * {
 	/* font-family: Gotham, Georgia; */
 	font-family: Georgia; 
@@ -30,8 +25,10 @@ body {
 	/* https://codepen.io/saransh/pen/BKJun */
 	background-image: url('../img/stardust.png');
 	background-repeat: repeat;
-	/* TODO: Disable this on battery operated devices I guess ... seems to be CPU intensive */
-	/* animation: animatedBackground 80s linear infinite; */
+	
+   -webkit-user-select: none;
+   -moz-user-select: none;
+	user-select: none; 
 	
 	overflow: hidden;
 	perspective: 3000;
@@ -52,7 +49,7 @@ body {
 }
 
 .monolith-floor .row, #ui-map .row {
-    margin-bottom: -9px; /* TODO: Fix this ... */
+    margin-bottom: -9px; /* TODO: Fix it so that this doesn't need to be here. ... */
 }
 
 .monolith-floor .col, #ui-map .fa {
@@ -125,6 +122,14 @@ body {
 	line-height: 2em;
 }
 
+.col .fa.Bunk.Beds {
+  margin-top: -6px;
+}
+
+.col .fa.Bunk.Beds ~ i {
+  margin-top: -12px;
+}
+
 #message-overlay {
 	position: absolute;
 	z-index: -5;
@@ -133,4 +138,8 @@ body {
 #message-overlay div {
 	text-align: center;
     display: table-cell;
+}
+
+#ui-map.mcfattys:before {
+	content: 'M';
 }

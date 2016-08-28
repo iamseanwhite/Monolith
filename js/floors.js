@@ -1,4 +1,5 @@
 Monolith.Floors = [];
+Monolith.StructureCount = {};
 
 Monolith.MaxRows = 3;
 Monolith.MaxCols = 3;
@@ -10,10 +11,15 @@ var defaultColumnClass = "fa fa-stack-1x";
 
 if(localStorage.getItem("MonolithFloors") != null) Monolith.Floors = JSON.parse(localStorage.getItem('MonolithFloors'));
 
-function setFloorTile(x, y, tileClass) {
+function setFloorTile(x, y, structure) {
+	
+	var structureCount = Monolith.StructureCount[structure.name] || 0;
+	
+	Monolith.StructureCount[structure.name] = structureCount + 1;
 	
 	 Monolith.CurrentFloor[x + "," + y] = {
-		 "className" : tileClass,
+		 "structure" : structure,
+		 // "className" : tileClass,
 		 "upgrades" : []
 	 }
 	 
@@ -21,14 +27,15 @@ function setFloorTile(x, y, tileClass) {
 	// localStorage.setItem('MonolithFloors', JSON.stringify(Monolith.Floors));
 }
 
-function upgradeFloorTile(x, y, tileClass) {
+function upgradeFloorTile(x, y, upgrade) {
 	
 	if (Monolith.CurrentFloor[x + "," + y] == null) {
 		console.log("NOT GOOD");
 		return;
 	}
 	
-	 Monolith.CurrentFloor[x + "," + y].upgrades.push(tileClass);
+	// TODO: Convert class to upgrade as with structure.
+	 Monolith.CurrentFloor[x + "," + y].upgrades.push(upgrade["ui-class"]);
 	 
 	// localStorage.setItem('MonolithFloors', JSON.stringify(Monolith.Floors));
 }
@@ -39,7 +46,7 @@ function addFloor() {
 	
 	jQuery("#ui-map").prepend('<div class="row"><i onclick="setCurrentFloor(getFloorIndex(this));" class="fa"></i></div>');
 	
-	if(Monolith.Floors.length > 1) jQuery("#ui-map").show();
+	if(Monolith.Floors.length > 1) jQuery("#ui-map").css("opacity", "1");
 	else jQuery("#ui-map .fa").addClass("currentFloor");
 }
 
@@ -51,6 +58,8 @@ function getFloorIndex(floorElement) {
 // TODO: Floor menu doesn't appear until you've purchased stairs
 
 function setCurrentFloor(floorIndex) {
+	
+	Monolith.UI.CloseMenus();
 	
 	if(Monolith.Floors[floorIndex] == Monolith.CurrentFloor) {
 		
@@ -150,8 +159,9 @@ function resetFloorItemClasses() {
 		row = jQuery("#monolith .row")[row];
 		col = jQuery(row).children(".col")[col];
 		
-		jQuery(jQuery(col).children("i")[0]).addClass(Monolith.CurrentFloor[floorItem].className);
+		jQuery(jQuery(col).children("i")[0]).addClass(Monolith.CurrentFloor[floorItem].structure["ui-class"]).addClass("buildStructure").addClass(structure.name);
 		// TODO: Loopy ...
+		// TODO: DEFECT: This can't get upgrade name so won't apply correctly ...
 		jQuery(jQuery(col).children("i")[1]).addClass(Monolith.CurrentFloor[floorItem].upgrades[0]);
 		
 		// Aren't actually targeting correct items ...
@@ -165,7 +175,7 @@ function currentFloorHasStairs() {
 	return Monolith.Floors.length -1 > jQuery(Monolith.Floors).index(Monolith.CurrentFloor);
 }
 
-Monolith.increaseMaxFloorSize = function(cols, rows) {
+Monolith.IncreaseMaxFloorSize = function(cols, rows) {
 	
 	Monolith.MaxRows += rows;
 	
@@ -174,4 +184,20 @@ Monolith.increaseMaxFloorSize = function(cols, rows) {
 	jQuery("#monolith").html(getFloorContent());
 	
 	resetFloorItemClasses();
+}
+
+Monolith.GetStructureCount = function(structureName) {
+	
+	return Monolith.StructureCount[structureName] || 0;
+}
+
+Monolith.GetFloorEntryForElement = function(element) {	
+	
+	var parent = jQuery(element).parent();
+	
+	var col = parent.children().index(element);
+	
+	var row = parent.parent().children().index(parent);
+	
+	return Monolith.CurrentFloor[col+","+row];
 }
