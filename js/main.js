@@ -13,3 +13,12 @@ String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
+
+// TODO: We may not have to do this if we're properly capturing mouse move where we expect to ...
+
+jQuery( window ).resize(function() {
+	
+	jQuery("body").css("max-width", jQuery(window).width());
+});
+
+jQuery(window).trigger('resize');

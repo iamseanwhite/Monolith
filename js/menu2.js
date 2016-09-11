@@ -1,5 +1,4 @@
-var structureShadowStyle = document.createElement("style");
-document.head.appendChild(structureShadowStyle);
+// TODO: All of these are actually to be removed ...
 
 function addMenu(menuId) {
 	
@@ -14,21 +13,6 @@ jQuery("#ui-variables").click(function() {
 	
 	openMenu("#lab-research");
 });
-
-// TODO: Refactor ... somehow
-function addItemToResearchMenu(itemClass, itemName, itemDescription) {
-	
-	var menu = "#lab-research";
-	
-	var itemClassName = itemClass.replaceAll(" ", ".");
-	
-	itemClass = itemClass + ' ' + itemName;
-	
-	jQuery(menu).prepend('<i class="fa fa-fw ' + itemClass + '" onClick="researchMenuItemClick(\'' + itemName + '\')"></i>');
-	
-	uiStyles.appendChild(document.createTextNode(menu + ' .' + itemClassName + ':hover ~ .description:before { content: \'' + itemName + ': \'; }'));
-	uiStyles.appendChild(document.createTextNode(menu + ' .' + itemClassName + ':hover ~ .description:after { content: \'' + itemDescription + '\'; }'));
-}
 
 function researchMenuItemClick(itemName) {
 	

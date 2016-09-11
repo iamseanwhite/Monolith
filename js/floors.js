@@ -4,22 +4,19 @@ Monolith.StructureCount = {};
 Monolith.MaxRows = 3;
 Monolith.MaxCols = 3;
 
-// TODO: Function to increase floor size ...
-
 var canChangeFloorsRightNow = true;
 var defaultColumnClass = "fa fa-stack-1x";
 
 if(localStorage.getItem("MonolithFloors") != null) Monolith.Floors = JSON.parse(localStorage.getItem('MonolithFloors'));
 
-function setFloorTile(x, y, structure) {
+function setFloorTile(floorIndex, structure) {
 	
 	var structureCount = Monolith.StructureCount[structure.name] || 0;
 	
 	Monolith.StructureCount[structure.name] = structureCount + 1;
 	
-	 Monolith.CurrentFloor[x + "," + y] = {
+	 Monolith.CurrentFloor[floorIndex] = {
 		 "structure" : structure,
-		 // "className" : tileClass,
 		 "upgrades" : []
 	 }
 	 
@@ -27,18 +24,24 @@ function setFloorTile(x, y, structure) {
 	// localStorage.setItem('MonolithFloors', JSON.stringify(Monolith.Floors));
 }
 
-function upgradeFloorTile(x, y, upgrade) {
+function upgradeFloorTile(floorIndex, upgrade) {
 	
-	if (Monolith.CurrentFloor[x + "," + y] == null) {
+	if (Monolith.CurrentFloor[floorIndex] == null) {
 		console.log("NOT GOOD");
 		return;
 	}
 	
-	// TODO: Convert class to upgrade as with structure.
-	 Monolith.CurrentFloor[x + "," + y].upgrades.push(upgrade["ui-class"]);
+	 Monolith.CurrentFloor[floorIndex].upgrades.push(upgrade);
 	 
 	// localStorage.setItem('MonolithFloors', JSON.stringify(Monolith.Floors));
 }
+
+function clearFloorTile(floorIndex) {
+	
+	delete Monolith.CurrentFloor[floorIndex];
+}
+
+// TODO: Write a "set current tile" function that takes the .active .col and stores its children as a floor tile ...
 
 function addFloor() {
 	
@@ -48,6 +51,16 @@ function addFloor() {
 	
 	if(Monolith.Floors.length > 1) jQuery("#ui-map").css("opacity", "1");
 	else jQuery("#ui-map .fa").addClass("currentFloor");
+	
+	// for all buildable items
+	// if floor number is the unlockedOnFloor for structure, add it to build menu ...
+	
+	for(var buildableName in Monolith.AllBuildables) {
+		
+		var buildable = Monolith.AllBuildables[buildableName];
+		
+		if(buildable.unlockedOnFloor == Monolith.Floors.length) addItemToMenu(buildable);
+	}
 }
 
 function getFloorIndex(floorElement) {
@@ -55,16 +68,13 @@ function getFloorIndex(floorElement) {
 	return jQuery("#ui-map .fa").length - 1 - jQuery("#ui-map .fa").index(floorElement);
 }
 
-// TODO: Floor menu doesn't appear until you've purchased stairs
-
 function setCurrentFloor(floorIndex) {
 	
 	Monolith.UI.CloseMenus();
 	
 	if(Monolith.Floors[floorIndex] == Monolith.CurrentFloor) {
 		
-		// console.log("We're already on floor " + floorIndex);
-		openMenu("#tower-upgrades");
+		// openMenu("#tower-upgrades");
 		
 		return;
 	}
@@ -115,10 +125,8 @@ function getFloorContent() {
 		floorContent += '<div class="row">';
 		
 		for(var col = 0; col < Monolith.MaxCols; col++) {
-			
-			// floorContent += '<i class="fa col noise" aria-hidden="true"></i>';
-			// floorContent += '<i class="fa col" onClick="monolithTileClicked(this)" aria-hidden="true"></i>';			
-			floorContent += '<div class="col fa-stack fa-lg" onClick="monolithTileClicked(this)"><i class="' + defaultColumnClass + '" aria-hidden="true"></i></div>';			
+						
+			floorContent += '<div class="col fa-stack fa-lg" onClick="monolithTileClicked(this)"></div>';			
 		}
 		
 		floorContent += '</div>';
@@ -150,7 +158,8 @@ function resetFloor() {
 
 function resetFloorItemClasses() {
 	
-	jQuery("#monolith .col .fa").attr("class", defaultColumnClass);
+	//jQuery("#monolith .col .fa").attr("class", defaultColumnClass);
+	jQuery("#monolith .col").children().remove();
 	
 	for(var floorItem in Monolith.CurrentFloor) {
 				
@@ -159,14 +168,16 @@ function resetFloorItemClasses() {
 		row = jQuery("#monolith .row")[row];
 		col = jQuery(row).children(".col")[col];
 		
-		jQuery(jQuery(col).children("i")[0]).addClass(Monolith.CurrentFloor[floorItem].structure["ui-class"]).addClass("buildStructure").addClass(structure.name);
-		// TODO: Loopy ...
-		// TODO: DEFECT: This can't get upgrade name so won't apply correctly ...
-		jQuery(jQuery(col).children("i")[1]).addClass(Monolith.CurrentFloor[floorItem].upgrades[0]);
+		var structure = Monolith.CurrentFloor[floorItem].structure;
 		
-		// Aren't actually targeting correct items ...
-		// TODO: How are we saving / restoring upgrades?
-		// jQuery(col).children(".fa").addClass(Monolith.CurrentFloor[floorItem]);
+		jQuery(col).append('<i class="fa fa-stack-1x buildStructure ' + structure["ui-class"] + ' ' +  structure.name + '"></i>');
+		
+		for(var upgradeIndex in Monolith.CurrentFloor[floorItem].upgrades) {
+			
+			var upgrade = Monolith.CurrentFloor[floorItem].upgrades[upgradeIndex];
+			
+			jQuery(col).append('<i class="fa fa-stack-1x buildStructure ' + upgrade["ui-class"] + ' ' +  upgrade.name + '"></i>');
+		}
 	}	
 }
 

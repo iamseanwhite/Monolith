@@ -1,5 +1,5 @@
 // TODO: structure requires another structure
-// TODO: No hyphens in prioerty names (looking at you, ui-class)
+// TODO: No hyphens in property names (looking at you, ui-class)
 
 var structures = [
 /*
@@ -17,8 +17,7 @@ var structures = [
       "name" : "Stairs",
 	 "ui-class":"fa-sort-amount-desc fa-flip-vertical",
 	 "description":"Unlock the next tower floor.",
-	 "materials" : "500",
-	 "research" : "10",
+	 "materials" : "350",
 	 "isStairs" : "true"
    },
    {
@@ -38,13 +37,23 @@ var structures = [
 	 "description":"Generates research.",
 	 "materials" : "225",
 	 "population" : "10",
+	 "unlockedOnFloor" : 2
    },
    {
       "name" : "Library",
 	 "ui-class":"fa-book",
 	 "description":"Boosts adjacent labs.",
 	 "materials" : "275",
-	 "research" : "30"
+	 "research" : "30",
+	 "unlockedOnFloor" : 6
+   },
+   {
+      "name" : "Bank",
+	 "ui-class":"fa-usd",
+	 "description":"Provides interest on materials.",
+	 "materials" : "275",
+	 "research" : "10",
+	 "unlockedOnFloor" : 2
    }
 ]
 
@@ -58,29 +67,37 @@ var upgrades = [
 */
    {
       "name" : "Bunk Beds",
+	  "structureType" : "upgrade",
 	 "ui-class":"fa-bed",
 	 "description":"Habitat supports 10 more population.",
-	 "materials" : "120",
+	 "materials" : "120",	 
+	 "unlockedOnFloor" : 3
    }
 ]
 
 var towerUpgrades = [
 	{
 		"name" : "McFattys",
+		"structureType" : "tower-upgrade",
 		"ui-class" : "mcfattys",
 		"description" : "Install a McFattys in your Monolith to widen the tower!",
-		"population" : "50"
+		"population" : "50",
+		"unlockedOnFloor" : 5
 	},	
 	{
 		"name" : "Struts",
+		"structureType" : "tower-upgrade",
 		"ui-class" : "struts",
 		"description" : "Throw some supports under your tower to allow it to increase in size.",
-		"population" : "150"
+		"population" : "150",
+		"unlockedOnFloor" : 10
 	},
 	{
 		"name" : "Anchors",
+		"structureType" : "tower-upgrade",
 		"ui-class" : "anchors fa-anchor",
 		"description" : "Install cables to anchor your tower to allow stable growth to greater heights.",
-		"population" : "500"
+		"population" : "500",
+		"unlockedOnFloor" : 15
 	}
 ]

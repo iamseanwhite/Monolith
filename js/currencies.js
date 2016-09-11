@@ -9,8 +9,6 @@ Monolith.Player.Resources.Population = 0;
 Monolith.Player.Resources.Materials = 1000;
 Monolith.Player.Resources.Research = 0;
 
-// TODO: If nothing else is built, can only build habitat
-
 var popPerHabitat = 10;
 
 Monolith.Player.Resources.CalculatePopulation = function() {
@@ -26,6 +24,8 @@ Monolith.Player.Resources.CalculateMaterials = function() {
 	
 	Monolith.Player.Resources.Materials = Math.floor(Monolith.Player.Resources.Materials + (Monolith.Player.Resources.Population / 5));
 	Monolith.UI.SetUIVariable("Materials", Monolith.Player.Resources.Materials);
+	
+	// TODO: Banks yo
 }
 
 var promptedYet = false;
@@ -34,6 +34,7 @@ Monolith.Player.Resources.CalculateResearch = function() {
 	Monolith.Player.Resources.Research = Monolith.Player.Resources.Research + Monolith.GetStructureCount("Lab");
 	Monolith.UI.SetUIVariable("Research", Monolith.Player.Resources.Research);
 	
+	/*
 	// TODO: And there's things that can be researched ... 
 	// TODO: We want to remind them each time a new research unlocks, and then periodically if all researches are unlocked. Maybe glow brighter for more research?
 	if(Monolith.Player.Resources.Research >= 10 && !promptedYet) {
@@ -41,9 +42,12 @@ Monolith.Player.Resources.CalculateResearch = function() {
 		promptedYet = true;
 		Monolith.UI.HighlightMenuItem(jQuery("#ui-variables .Research"));
 	}
+	*/
 }
 
 Monolith.PayResource = function(resource, amount) {
+	
+	// TODO: Little animation when this happens. Maybe like a falling thing with a - amount
 	
 	if(Monolith.Player.Resources[resource] < amount) return false;
 	
@@ -58,4 +62,4 @@ setInterval(Monolith.Player.Resources.CalculatePopulation, 5000);
 
 setInterval(Monolith.Player.Resources.CalculateMaterials, 2500);
 
-setInterval(Monolith.Player.Resources.CalculateResearch, 5000);
+setInterval(Monolith.Player.Resources.CalculateResearch, 10000);

@@ -2,6 +2,11 @@
   --main-fg-color: #05668D;
   --main-bg-color: #CEBD9A;
   
+  /* Battlefield 1: 
+  --main-fg-color: rgb(101, 153, 200);
+  --main-bg-color: rgb(183, 145, 108);
+  */
+  
   --enemy-color: #C92E2C;
   /* others: 56153D, 028090,00A896,02C39A */
   --ui-opacity: .85;

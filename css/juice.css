@@ -56,3 +56,10 @@ body {
 	/* TODO: This */
 	-webkit-mask: url('../img/stardust.png');
 }
+
+.buildMenuItemUpdate {
+	
+	background-size: 300%;
+	
+	transition : all 1s ease-in-out;
+}

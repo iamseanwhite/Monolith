@@ -11,8 +11,15 @@ Monolith.UI.SetUIVariable = function(name, value) {
 		jQuery("#ui-variables").append('<div class="' + name + '"></div>');
 	}
 	
-	jQuery("#ui-variables div." + name).html('<i title="' + name + '" class="fa ' + Monolith.Resources[name].Icon + '" aria-hidden="true"> ' + value + '</i>');
+	jQuery("#ui-variables div." + name).html('<i title="' + name + '" class="fa ' + Monolith.Resources[name].Icon + '"> ' + value + '</i>');
 }
+
+jQuery(function() { // Sorry, got lazy
+
+	var minHeight = parseInt(jQuery(".description").css("line-height")) * 2;
+
+	jQuery(".description").css("min-height", minHeight + "px");
+});
 
 
 
