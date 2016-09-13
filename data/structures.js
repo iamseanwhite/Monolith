@@ -45,7 +45,7 @@ var structures = [
 	 "description":"Boosts adjacent labs.",
 	 "materials" : "275",
 	 "research" : "30",
-	 "unlockedOnFloor" : 6
+	 "unlockedOnFloor" : 8
    },
    {
       "name" : "Bank",
@@ -53,7 +53,7 @@ var structures = [
 	 "description":"Provides interest on materials.",
 	 "materials" : "275",
 	 "research" : "10",
-	 "unlockedOnFloor" : 2
+	 "unlockedOnFloor" : 6
    }
 ]
 

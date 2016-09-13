@@ -1,11 +1,12 @@
 Monolith.Floors = [];
 Monolith.StructureCount = {};
+Monolith.CurrentFloorIndex = 0;
 
 Monolith.MaxRows = 3;
 Monolith.MaxCols = 3;
 
 var canChangeFloorsRightNow = true;
-var defaultColumnClass = "fa fa-stack-1x";
+var defaultColumnClass = " fa fa-stack-1x buildStructure ";
 
 if(localStorage.getItem("MonolithFloors") != null) Monolith.Floors = JSON.parse(localStorage.getItem('MonolithFloors'));
 
@@ -81,6 +82,8 @@ function setCurrentFloor(floorIndex) {
 	if(!canChangeFloorsRightNow) return;
 	canChangeFloorsRightNow = false;
 	
+	Monolith.CurrentFloorIndex = floorIndex;
+	
 	Monolith.CurrentFloor = Monolith.Floors[floorIndex];
 	
 	jQuery(".currentFloor").removeClass("currentFloor");
@@ -98,13 +101,13 @@ function drawFloor() {
 	
 	// Well. This certainly got complicated. 
 	
-	var transitionTime = 1500;
+	var transitionTime = 1350;
 	
 	jQuery("#wrapper")
 		.css("transition", "all " + transitionTime + "ms")
 		.prepend( '<div id="newFloor" class="monolith-floor">' + getFloorContent() + '</div>' );
 		
-	jQuery(".monolith-floor .col").css("transition", "opacity 2s");
+	jQuery(".monolith-floor .col").css("transition", "opacity " + (transitionTime / 2) + "ms");
 	
 	var delta = parseInt(jQuery("#monolith").offset().top) - parseInt(jQuery("#newFloor").offset().top);
 	
@@ -137,11 +140,11 @@ function getFloorContent() {
 
 function resetFloor() {
 	
-	jQuery("#monolith").hide();
+	// jQuery("#monolith").hide();
 	
 	resetFloorItemClasses();
 		
-	jQuery(".monolith-floor .col").css("transition", "");
+	// jQuery(".monolith-floor .col").css("transition", "");
 	
 	jQuery("#wrapper")
 		.css("transition", "")
@@ -151,7 +154,7 @@ function resetFloor() {
 	jQuery("#newFloor .col").css("opacity", "0");
 	
 	jQuery("#newFloor").remove();
-	jQuery("#monolith").show();	
+	// jQuery("#monolith").show();
 	
 	canChangeFloorsRightNow = true;
 }
@@ -170,13 +173,13 @@ function resetFloorItemClasses() {
 		
 		var structure = Monolith.CurrentFloor[floorItem].structure;
 		
-		jQuery(col).append('<i class="fa fa-stack-1x buildStructure ' + structure["ui-class"] + ' ' +  structure.name + '"></i>');
+		jQuery(col).append('<i class="' + structure.name + defaultColumnClass + structure["ui-class"] + '"></i>');
 		
 		for(var upgradeIndex in Monolith.CurrentFloor[floorItem].upgrades) {
 			
 			var upgrade = Monolith.CurrentFloor[floorItem].upgrades[upgradeIndex];
 			
-			jQuery(col).append('<i class="fa fa-stack-1x buildStructure ' + upgrade["ui-class"] + ' ' +  upgrade.name + '"></i>');
+			jQuery(col).append('<i class="' + upgrade.name + defaultColumnClass + upgrade["ui-class"] + '"></i>');
 		}
 	}	
 }

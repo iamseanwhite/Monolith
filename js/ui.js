@@ -64,10 +64,16 @@ jQuery("body").on("mousemove", function(e) {
 	jQuery("#btn-reset-monolith-rotation").show();
 });
 
+jQuery("body").bind('mousewheel', function(e) {
+    if(e.originalEvent.wheelDelta / 120 > 0) {
+        setCurrentFloor(Monolith.CurrentFloorIndex + 1);
+    } else {
+        setCurrentFloor(Monolith.CurrentFloorIndex - 1);
+    }
+});
+
 jQuery("#btn-reset-monolith-rotation").click(function() {
 	$("#monolith").css("transform", "rotateX(45deg) rotateZ(45deg)");
 	
 	jQuery("#btn-reset-monolith-rotation").hide();
 });
-
-// TODO: Onscroll = change floors

@@ -8,13 +8,8 @@ Monolith.Juice.BuildMenuItemUpdate = function(menuItem) {
 		
 	var newWidth = jQuery(parent).outerWidth() * 1;
 	var newHeight = jQuery(parent).outerHeight() * 1;
-	// console.log(newWidth + "px " + newHeight + "px");
-	
-	console.log(jQuery(parent).outerWidth());
 	
 	jQuery(parent).addClass("buildMenuItemUpdate");
-	
-	console.log(jQuery(parent).outerWidth());
 	
 	setTimeout(function() {
 		

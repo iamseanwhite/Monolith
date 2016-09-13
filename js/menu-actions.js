@@ -107,7 +107,7 @@ Monolith.UI.BuildMenuItemClick = function(itemName) {
 		if(buildItem.materials) newHtml += '<i class="fa ' + Monolith.Resources["Materials"].Icon + '">' + buildItem.materials + '</i>';	
 		if(buildItem.population) newHtml += '<i class="fa ' + Monolith.Resources["Population"].Icon + '">' + buildItem.population + '</i>';
 		
-		var parent = jQuery(".menu ." + itemName).parent();
+		var parent = jQuery(".menu div." + itemName);
 		
 		Monolith.Juice.BuildMenuItemUpdate(parent);
 			
@@ -133,7 +133,9 @@ function doBuild(structure) {
 	
 	if(structure.isStairs && currentFloorHasStairs()) return;
 	
-	if(!Monolith.PayResource("Materials", structure.materials)) return;
+	if(structure.materials) if(!Monolith.PayResource("Materials", structure.materials)) return;
+	
+	if(structure.population) if(!Monolith.PayResource("Population", structure.population)) return;
 		
 	var activeElement = jQuery("#monolith .col.active");
 	
@@ -172,7 +174,9 @@ function structureAdded(structure) {
 	
 	if(structure.name == "Habitat") clearTimeout(notifyShelterHint);
 	
-	if(structure.name == "Lab") clearTimeout(notifyLabHint);	
+	if(structure.name == "Lab") clearTimeout(notifyLabHint);
+	
+	if(structure.name == "McFattys") Monolith.IncreaseMaxFloorSize(1, 0);
 	
 	if(structure.isStairs) { 
 	

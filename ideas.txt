@@ -7,3 +7,7 @@ Maybe rather than turrets have farms ... point is to create sustainable humanity
 Library: Speeds up labs
 	Can only be built adjacent to existing libraries
 	Libraries are gifted randomly by "dignitaries" at milestones
+	
+When rendering "3D": http://www.noeltock.com/tilt-shift-css3-jquery-plugin/
+
+Minification: http://stackoverflow.com/questions/9287823/combine-and-minify-multiple-css-js-files

@@ -6,14 +6,15 @@ Monolith.Resources = {
 
 Monolith.Player.Resources = {};
 Monolith.Player.Resources.Population = 0;
-Monolith.Player.Resources.Materials = 1000;
+Monolith.Player.Resources.Materials = 10000;
 Monolith.Player.Resources.Research = 0;
 
-var popPerHabitat = 10;
+Monolith.PopPerHabitat = 10;
+Monolith.BankInterest = 0.01;
 
 Monolith.Player.Resources.CalculatePopulation = function() {
 	
-	var maxPop = (Monolith.GetStructureCount("Habitat") * popPerHabitat) + (Monolith.GetStructureCount("Bunk Beds") * popPerHabitat);
+	var maxPop = (Monolith.GetStructureCount("Habitat") * Monolith.PopPerHabitat) + (Monolith.GetStructureCount("Bunk Beds") * Monolith.PopPerHabitat);
 	if(Monolith.Player.Resources.Population < maxPop) Monolith.Player.Resources.Population = Monolith.Player.Resources.Population + 1;
 	if (Monolith.Player.Resources.Population > maxPop) Monolith.Player.Resources.Population = maxPop;
 	
@@ -23,9 +24,10 @@ Monolith.Player.Resources.CalculatePopulation = function() {
 Monolith.Player.Resources.CalculateMaterials = function() {
 	
 	Monolith.Player.Resources.Materials = Math.floor(Monolith.Player.Resources.Materials + (Monolith.Player.Resources.Population / 5));
-	Monolith.UI.SetUIVariable("Materials", Monolith.Player.Resources.Materials);
 	
-	// TODO: Banks yo
+	Monolith.Player.Resources.Materials += Monolith.GetStructureCount("Bank") * Monolith.Player.Resources.Materials * Monolith.BankInterest;
+	
+	Monolith.UI.SetUIVariable("Materials", Monolith.Player.Resources.Materials);
 }
 
 var promptedYet = false;
@@ -51,7 +53,7 @@ Monolith.PayResource = function(resource, amount) {
 	
 	if(Monolith.Player.Resources[resource] < amount) return false;
 	
-	Monolith.Player.Resources[resource] -= amount;
+	if(resource != "Population") Monolith.Player.Resources[resource] -= amount;
 	
 	Monolith.UI.SetUIVariable(resource, Monolith.Player.Resources[resource]);
 	
