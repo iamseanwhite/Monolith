@@ -16,8 +16,6 @@ Monolith.UI.Hint = function(message) {
 Monolith.UI.TitleMessage = function(message) {
 	
 	jQuery("#message-overlay div")
-		.css("vertical-align", "top")
-		.css("padding-top", "10%")
 		.append('<span>' + message + '</span>');
 		
 	setTimeout(function() {

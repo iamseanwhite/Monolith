@@ -12,7 +12,8 @@
   --ui-opacity: .85;
   --monolith-opacity: .42;
   
-  --block-size: 64px;
+  /* --block-size: 64px; */
+  --block-size: 1em;
   --main-bg-color-rgba: rgba(206, 189, 154, var(--ui-opacity));
 }
 
@@ -37,6 +38,8 @@ body {
 	
 	overflow: hidden;
 	perspective: 3000;
+	
+	font-size: 5vw;
 }
 
 #main, #message-overlay {		
@@ -54,7 +57,7 @@ body {
 }
 
 .monolith-floor .row, #ui-map .row {
-    margin-bottom: -9px; /* TODO: Fix it so that this doesn't need to be here. ... */
+    margin-bottom: -.2vw;  /* TODO: Fix it so that this doesn't need to be here. ... */
 }
 
 .monolith-floor .col, #ui-map .fa {
@@ -66,7 +69,6 @@ body {
 	transition: all .2s ease-in-out;
 	
 	vertical-align: text-bottom;
-    margin-bottom: 3px;
     font-size: 3em;
     text-align: center;	
 }
@@ -121,6 +123,7 @@ body {
 
 .col.fa-stack .fa {
 	line-height: 1.2em;
+    margin-top: .1vw;
 }
 
 .col .fa.Bunk.Beds {
@@ -147,4 +150,8 @@ body {
 
 #ui-map.mcfattys:before {
 	content: 'M';
+}
+
+#monolith .fa {
+	font-size: .75em;
 }
