@@ -39,3 +39,25 @@ Monolith.Juice.BuildMenuItemUpdate = function(menuItem) {
 		});
 	}, 3000);
 }
+
+Monolith.Juice.MenuOpen = function(menu) {
+	
+	var top = jQuery(menu).offset().top;
+	
+	// Starting from the bottom, not the top
+	var bottom = $(window).height() - jQuery(menu).height() - jQuery(menu).offset().top;
+	bottom = jQuery(menu).position().top + jQuery(menu).offset().top + jQuery(menu).outerHeight(true);
+	bottom = jQuery(menu).position().top + jQuery(menu).offset().top;
+	bottom = jQuery("#monolith .col.active").offset().top;
+	console.log("bottom: " + bottom + " top " + top + " offset " + jQuery(menu).offset().top + "height " + jQuery(menu).outerHeight());
+	
+	jQuery(menu).css("bottom", bottom).css("top", "");
+	
+	jQuery(menu).css("max-height", ".5em");
+	
+	jQuery(menu).css("visibility", "visible");
+	
+	setTimeout(function() {
+		jQuery(menu).css("max-height", "100%");
+	}, 1);
+}

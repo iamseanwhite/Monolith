@@ -18,7 +18,7 @@ String.prototype.replaceAll = function(search, replacement) {
 
 jQuery( window ).resize(function() {
 	
+	Monolith.UI.CloseMenus();
+	
 	jQuery("body").css("max-width", jQuery(window).width());
 });
-
-jQuery(window).trigger('resize');

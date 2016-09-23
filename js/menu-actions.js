@@ -28,6 +28,26 @@ function openMenu(menu) {
 	// Monolith.UI.DisableUnupgradeableUpgades();
 	
 	jQuery(menu).css("transform", "translateX(-" + jQuery(menu).outerWidth() + "px)");
+	
+	/*
+	var newTop = jQuery(".col.active").offset().top - jQuery(menu)[0].offsetHeight; // + (jQuery(".col.active")[0].offsetHeight / 3);
+	var newLeft = jQuery(".col.active").offset().left + (jQuery(".col.active")[0].offsetWidth * .75) - (jQuery(menu)[0].offsetWidth / 2);
+	jQuery(menu).css({
+		top: newTop,
+		left: newLeft
+	}); //.css("max-height", ".5em");
+	
+	// Monolith.Juice.MenuOpen(menu);
+	
+	jQuery(menu).css("visibility", "visible");
+	
+	// jQuery(menu).css("visibility", "visible");
+	
+	/*
+	setTimeout(function() {
+		jQuery(menu).css("max-height", "100%");
+	}, 1);
+	*/
 }
 
 Monolith.UI.DisableUnbuildableStructures = function(menu) {
@@ -40,19 +60,24 @@ Monolith.UI.DisableUnbuildableStructures = function(menu) {
 		var structure = Monolith.AllBuildables[buildableName];
 		var structureClassName = structure.name.replace(" ", ".");
 		
-		// TODO: For loop of non-research resources
+		jQuery(".menu ." + structureClassName).removeClass("disabled");
 		
+		for(var resource in Monolith.Player.Resources) {
+				
+			if(Monolith.Player.Resources[resource] < structure[resource]) jQuery(".menu ." + structureClassName).addClass("disabled");
+		}
+		
+		/*
 		if(!Monolith.IsResearched(structure)) {
 			
-			if(Monolith.Player.Resources.Research < structure.research) jQuery(".menu ." + structureClassName).addClass("disabled");
+			if(Monolith.Player.Resources.research < structure.research) jQuery(".menu ." + structureClassName).addClass("disabled");
 			else jQuery(".menu ." + structureClassName).removeClass("disabled");			
 		} else {
 			
-			if(Monolith.Player.Resources.Materials < structure.materials) jQuery(".menu ." + structureClassName).addClass("disabled");
+			if(Monolith.Player.Resources.materials < structure.materials) jQuery(".menu ." + structureClassName).addClass("disabled");
 			else jQuery(".menu ." + structureClassName).removeClass("disabled");
-
-			jQuery(".menu ." + structureClassName).parent().children("." + Monolith.Resources["Materials"].Icon).html(structure.materials);
-		}		
+		}
+		*/
 	}
 }
 
@@ -96,26 +121,8 @@ Monolith.UI.BuildMenuItemClick = function(itemName) {
 	
 	if(!Monolith.IsResearched(buildItem)) {
 		
-		console.log("Have not researched " + buildItem.name);
+		Monolith.DoResearch(buildItem);
 		
-		if(!Monolith.PayResource("Research", buildItem.research)) return; // TODO: Some kind of can't afford sound
-		
-		Monolith.ResearchedItems.push(buildItem);
-		
-		// TODO: loop through materials
-		var newHtml = "";
-		if(buildItem.materials) newHtml += '<i class="fa ' + Monolith.Resources["Materials"].Icon + '">' + buildItem.materials + '</i>';	
-		if(buildItem.population) newHtml += '<i class="fa ' + Monolith.Resources["Population"].Icon + '">' + buildItem.population + '</i>';
-		
-		var parent = jQuery(".menu div." + itemName);
-		
-		Monolith.Juice.BuildMenuItemUpdate(parent);
-			
-		setTimeout(function() {
-			jQuery(parent).children("."  + Monolith.Resources["Research"].Icon).remove();
-			parent.html(parent.html() + newHtml);
-		}, 1000);
-				
 		return;
 	}
 	
@@ -129,13 +136,36 @@ Monolith.UI.BuildMenuItemClick = function(itemName) {
 	Monolith.UI.CloseMenus();
 }
 
+Monolith.DoResearch = function(buildItem) {
+			
+	// console.log("Have not researched " + buildItem.name);
+	
+	if(!Monolith.PayResource("research", buildItem.research)) return; // TODO: Some kind of can't afford sound
+	
+	Monolith.ResearchedItems.push(buildItem);
+	
+	// TODO: loop through materials
+	var newHtml = "";
+	if(buildItem.materials) newHtml += '<i class="fa ' + Monolith.Resources["materials"].Icon + '">' + buildItem.materials + '</i>';	
+	if(buildItem.population) newHtml += '<i class="fa ' + Monolith.Resources["population"].Icon + '">' + buildItem.population + '</i>';
+	
+	var parent = jQuery(".menu div." + itemName);
+	
+	Monolith.Juice.BuildMenuItemUpdate(parent);
+		
+	setTimeout(function() {
+		jQuery(parent).children("."  + Monolith.Resources["Research"].Icon).remove();
+		parent.html(parent.html() + newHtml);
+	}, 1000);
+}
+
 function doBuild(structure) {
 	
 	if(structure.isStairs && currentFloorHasStairs()) return;
 	
-	if(structure.materials) if(!Monolith.PayResource("Materials", structure.materials)) return;
+	if(structure.materials) if(!Monolith.PayResource("materials", structure.materials)) return;
 	
-	if(structure.population) if(!Monolith.PayResource("Population", structure.population)) return;
+	if(structure.population) if(!Monolith.PayResource("population", structure.population)) return;
 		
 	var activeElement = jQuery("#monolith .col.active");
 	
@@ -181,6 +211,9 @@ function structureAdded(structure) {
 	if(structure.isStairs) { 
 	
 		structure.materials = structure.materials * 2;
+		
+		var structureClassName = structure.name.replace(" ", ".");
+		jQuery(".menu ." + structureClassName).parent().children("." + Monolith.Resources["materials"].Icon).html(structure.materials);
 		
 		addFloor();
 	}
