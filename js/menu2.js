@@ -41,7 +41,7 @@ Monolith.UI.DisableUnresearchableResearch = function() {
 		var structure = Monolith.Structures[structureName];
 		
 		// TODO: Test if we can do .menu instead of specifying the menu
-		if(Monolith.Player.Resources.Research < structure.research) jQuery("#lab-research ." + structure.name).addClass("disabled");
+		if(Monolith.Player.Resources.research < structure.research) jQuery("#lab-research ." + structure.name).addClass("disabled");
 		else jQuery("#lab-research ." + structure.name).removeClass("disabled");
 	}	
 }
@@ -52,7 +52,7 @@ Monolith.UI.DisableUnupgradeableUpgades = function() {
 		
 		var towerUpgrade = Monolith.TowerUpgrades[towerUpgradeName];
 		
-		if(Monolith.Player.Resources.Population < towerUpgrade.population) jQuery("#tower-upgrades ." + towerUpgrade.name).addClass("disabled");
+		if(Monolith.Player.Resources.population < towerUpgrade.population) jQuery("#tower-upgrades ." + towerUpgrade.name).addClass("disabled");
 		else jQuery("#tower-upgrades ." + towerUpgrade.name).removeClass("disabled");
 	}	
 }

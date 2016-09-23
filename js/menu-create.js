@@ -26,9 +26,9 @@ function addItemToMenu(menuItem) {
 		
 		// TODO: Loop cost types
 		
-		if(menuItem.materials) menuItemCost += '<i class="fa ' + Monolith.Resources["Materials"].Icon + '">' + menuItem.materials + '</i>';
+		if(menuItem.materials) menuItemCost += '<i class="fa ' + Monolith.Resources["materials"].Icon + '">' + menuItem.materials + '</i>';
 	
-		if(menuItem.population) menuItemCost += '<i class="fa ' + Monolith.Resources["Population"].Icon + '">' + menuItem.population + '</i>';
+		if(menuItem.population) menuItemCost += '<i class="fa ' + Monolith.Resources["population"].Icon + '">' + menuItem.population + '</i>';
 	}
 	
 	jQuery(menu).prepend('<div style="display: inline-block" class="' + menuItem["name"] + '" onClick="Monolith.UI.BuildMenuItemClick(\'' + menuItem["name"] + '\')"><i class="fa ' + itemClass + '"></i>' +

@@ -1,9 +1,11 @@
-Monolith.UI.SetUIVariable("Materials", Monolith.Player.Resources.Materials);
+jQuery(window).trigger('resize');
+
+Monolith.UI.SetUIVariable("materials", Monolith.Player.Resources.materials);
 
 Monolith.UI.TitleMessage('<h1>Monolith</h1>');
 
 var notifyShelterHint = setTimeout(function() {
-	Monolith.UI.Hint('<i class="fa ' + Monolith.Structures.Habitat["ui-class"] + '"/> x <i class="fa fa-clock-o" /> = <i class="fa ' + Monolith.Resources["Materials"].Icon + '" />');
+	Monolith.UI.Hint('<i class="fa ' + Monolith.Structures.Habitat["ui-class"] + '"/> x <i class="fa fa-clock-o" /> = <i class="fa ' + Monolith.Resources["materials"].Icon + '" />');
 	}, 15000);
 	
 var notifyBuildHint = setTimeout(function() {
