@@ -15,7 +15,10 @@ var structures = [
 */
    {
       "name" : "Stairs",
+	  /*
 	 "ui-class":"fa-sort-amount-desc fa-flip-vertical",
+	 */
+	 "ui-class":"flaticon-stairs-1",
 	 "description":"Unlock the next tower floor.",
 	 "materials" : "350",
 	 "isStairs" : "true"
