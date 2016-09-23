@@ -8,7 +8,7 @@
 body {
 	
 	/* TODO: Disable this on battery operated devices I guess ... seems to be CPU intensive */
-	/* animation: animatedBackground 80s linear infinite; */
+	/* animation: animatedBackground 50s linear infinite; */
 }
 
 #message-overlay h1 {
@@ -53,8 +53,9 @@ body {
 
 .menu {
 	
-	/* TODO: This */
+	/* TODO: This 
 	-webkit-mask: url('../img/stardust.png');
+	*/
 }
 
 .buildMenuItemUpdate {

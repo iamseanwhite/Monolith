@@ -57,24 +57,42 @@
 	z-index: 5;
 	
 	transition: transform 1s; 
+	/* overflow: hidden; */
 	/* TODO: Make description height kind of fixed for minimum description, and flex to height change ... */
+}
+
+/* TODO: Figure out what to do with this */
+.description, .description:before, .description:after { 
+	display: none;
 }
 
 .description:before {
 	font-weight: bold;
 }
 
+/*
 .menu:not(#ui-map) > div {
 	display: inline-block;
 	margin: 8px;
 	cursor: pointer;
 	
-    /* padding: 4px; */
+    /* padding: 4px; * /
 }
+*/
 
 .menu .fa {
 		
-    font-size: 3em;
+    font-size: 2em;
+}
+
+.menu div .fa {
+	
+	padding: 4px;
+}
+
+.menu div .fa:before {
+	
+	padding-right: 2px;
 }
 
 .menu .disabled {
@@ -87,9 +105,10 @@
 	font-size: 1.5em;
 }
 
-.menu:not(#ui-map) div {
+#ui-build-menu div, #ui-block-detail div {
 	display: inline-block;
 	vertical-align: top;
+	margin: 8px;
 }
 
 #ui-map .fa {
@@ -134,3 +153,36 @@
 .menu div {
 	cursor: pointer;
 }
+
+#ui-build-menu {
+	
+	border: 1px solid silver;
+}
+
+/*
+#ui-build-menu:before {
+	
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    border-width: 20px 20px 0;
+    border-style: solid;
+    border-color: silver transparent;
+    left: 50%;
+    margin-left: -20px;
+}
+
+#ui-build-menu:after {
+	
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    border-width: 18px 18px 0;
+    border-style: solid;
+    border-color: rgb(42, 91, 111) transparent;
+    display: block;
+    width: 0;
+    margin-left: -17px;
+}
+*/
