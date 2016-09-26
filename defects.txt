@@ -3,8 +3,11 @@ As for descriptions. Maybe click selects a building, double-click builds, click 
 
 upgrades don't have description
 
+deleting stairs should remove floor entries from map and stuff
 
+building structures (class?) does not charge correctly (...when ...)
+	I think maybe I meant that the building structure class isn't applying the way it should ...
 
-## Maybe fixed ##
+scale animates for center col but not others  # None seem to scale now
 
 New floors should fade in individually, rather than as a group

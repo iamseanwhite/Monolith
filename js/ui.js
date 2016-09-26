@@ -65,6 +65,9 @@ jQuery("body").on("mousemove", function(e) {
 });
 
 jQuery("body").bind('mousewheel', function(e) {
+	
+	if(e.ctrlKey) return;
+	
     if(e.originalEvent.wheelDelta / 120 > 0) {
         setCurrentFloor(Monolith.CurrentFloorIndex + 1);
     } else {

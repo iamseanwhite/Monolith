@@ -71,7 +71,7 @@ function getFloorIndex(floorElement) {
 
 function setCurrentFloor(floorIndex) {
 	
-	Monolith.UI.CloseMenus();
+	if(Monolith.Floors[floorIndex] === undefined) return;
 	
 	if(Monolith.Floors[floorIndex] == Monolith.CurrentFloor) {
 		
@@ -79,6 +79,9 @@ function setCurrentFloor(floorIndex) {
 		
 		return;
 	}
+	
+	Monolith.UI.CloseMenus();
+	
 	if(!canChangeFloorsRightNow) return;
 	canChangeFloorsRightNow = false;
 	
