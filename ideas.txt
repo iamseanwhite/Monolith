@@ -1,3 +1,9 @@
+Previous floor above at 50% opacity
+
+next floor below at 50% opacity
+
+maybe separate out description from menu
+
 Achievements:
 Shooty McShootFace : have a turret with 100+ kills
 Slaughter: Have over 1000 total kills
@@ -7,6 +13,9 @@ Maybe rather than turrets have farms ... point is to create sustainable humanity
 Library: Speeds up labs
 	Can only be built adjacent to existing libraries
 	Libraries are gifted randomly by "dignitaries" at milestones
+	
+Kitchen, and walk-in freezer.
+	If freezer is adjacent to turret, enables slowing bullets
 	
 When rendering "3D": http://www.noeltock.com/tilt-shift-css3-jquery-plugin/
 

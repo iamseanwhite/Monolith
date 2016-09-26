@@ -35,6 +35,12 @@ var structures = [
 	 ]
    },
    {
+      "name" : "Kitchen",
+	 "ui-class":"fa-cutlery",
+	 "description":"Feeds up to 10 population.",
+	 "materials" : "250",
+   },
+   {
       "name" : "Lab",
 	 "ui-class":"fa-flask",
 	 "description":"Generates research.",
@@ -43,20 +49,20 @@ var structures = [
 	 "unlockedOnFloor" : 2
    },
    {
-      "name" : "Library",
-	 "ui-class":"fa-book",
-	 "description":"Boosts adjacent labs.",
-	 "materials" : "275",
-	 "research" : "30",
-	 "unlockedOnFloor" : 8
-   },
-   {
       "name" : "Bank",
 	 "ui-class":"fa-usd",
 	 "description":"Provides interest on materials.",
 	 "materials" : "275",
 	 "research" : "10",
 	 "unlockedOnFloor" : 6
+   },
+   {
+      "name" : "Library",
+	 "ui-class":"fa-book",
+	 "description":"Boosts adjacent labs.",
+	 "materials" : "275",
+	 "research" : "30",
+	 "unlockedOnFloor" : 8
    }
 ]
 
