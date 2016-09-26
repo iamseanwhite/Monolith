@@ -87,7 +87,7 @@
 
 .menu div .fa {
 	
-	padding: 4px;
+	padding: 8px 8px 4px 8px;
 }
 
 .menu div .fa:before {
@@ -102,13 +102,15 @@
 }
 
 .menu :not(#lab-research) .fa:not(:first-child) {
-	font-size: 1.5em;
+	font-size: .75em;
 }
 
 #ui-build-menu div, #ui-block-detail div {
 	display: inline-block;
 	vertical-align: top;
 	margin: 8px;
+    margin-bottom: 0px;
+    padding-bottom: 8px;
 }
 
 #ui-map .fa {
@@ -130,7 +132,7 @@
 
 #ui-map {
 	position: absolute;
-	left: 0px;
+	left: 12px;
 	top: 50%;
 	background: none;
 	border: none;
@@ -142,7 +144,7 @@
 }
 
 #ui-map .row:not(:first-child) {
-	margin-top: calc(var(--block-size) * -.65);
+	margin-top: calc(var(--block-size) * -1.65);
 }
 
 #ui-map .currentFloor {
@@ -150,13 +152,49 @@
 	transition: background-color 1s ease-in-out;
 }
 
+#ui-map .row i:before {
+	/* TODO: Each floor's content should be its floor number
+	content: '1';
+	*/
+    vertical-align: top;
+    margin-left: 50%;
+    font-size: .5em;
+}
+
 .menu div {
 	cursor: pointer;
 }
 
+/*
 #ui-build-menu {
 	
 	border: 1px solid silver;
+}
+*/
+
+.menu.bottom {
+	
+	width: 100%;
+	max-width: 99%;
+	left: 0px;
+	top: auto;
+	bottom: 2px;
+	
+	background-color: transparent;
+	border: none;
+}
+
+.menu.bottom div {
+	
+	border-top: 1px solid silver;
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
+		
+    background-color: rgb(42, 91, 111);
+}
+
+.menu.bottom div.description {
+	display: none !important;
 }
 
 /*

@@ -27,7 +27,11 @@ function openMenu(menu) {
 	
 	// Monolith.UI.DisableUnupgradeableUpgades();
 	
-	jQuery(menu).css("transform", "translateX(-" + jQuery(menu).outerWidth() + "px)");
+	jQuery(menu).addClass("bottom")
+		.css("bottom", "-" + jQuery(menu).outerHeight() + "px")
+		.css("transform", "translateY(-" + jQuery(menu).outerHeight() + "px)");
+	
+	// jQuery(menu).css("transform", "translateX(-" + jQuery(menu).outerWidth() + "px)");
 	
 	/*
 	var newTop = jQuery(".col.active").offset().top - jQuery(menu)[0].offsetHeight; // + (jQuery(".col.active")[0].offsetHeight / 3);
