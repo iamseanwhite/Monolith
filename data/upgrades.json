@@ -1,0 +1,10 @@
+[
+   {
+      "name" : "Bunk Beds",
+	  "structureType" : "upgrade",
+	 "ui-class":"fa-bed",
+	 "description":"Habitat supports 10 more population.",
+	 "materials" : "120",	 
+	 "unlockedOnFloor" : 3
+   }
+]

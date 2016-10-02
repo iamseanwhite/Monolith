@@ -1,44 +1,36 @@
-Monolith.Structures = {};
-Monolith.Upgrades = {};
-Monolith.TowerUpgrades = {};
 Monolith.AllBuildables = {};
+Monolith.GamePackages = ["upgrades", "structures", "upgrades-td", "structures-td"];
 
-for (var index in upgrades) {
+getStructures = function(packageName) {
 	
-	var upgrade = upgrades[index];
-	
-	if(!upgrade.unlockedOnFloor) addItemToMenu(upgrade);
-	
-	Monolith.Upgrades[upgrade.name] = upgrade;
+	Monolith.GamePackages.shift();
+
+	// TODO: A code branch should be added to handle get failure
+	jQuery.get("data/" + packageName + ".json").done(function(data) {
+		
+		var structures = JSON.parse(data);
+		
+		for (var index in structures) {
+			
+			var structure = structures[index];
+				
+			// Monolith.Structures[structure.name] = structure;
+			Monolith.AllBuildables[structure.name] = structure;
+			
+			if(!structure.unlockedOnFloor) addItemToMenu(structure);
+			
+			if(!structure.upgrades) continue;
+			
+			for(var i = 0; i < structure.upgrades.length; i++) {
+				
+				structure.upgrades[i] = Monolith.AllBuildables[structure.upgrades[i].name];
+			}
+		}
+		
+		if(Monolith.GamePackages.length > 0) getStructures(Monolith.GamePackages[0]);
+		else delete Monolith.GamePackages;
+		// TODO: Inside above 'else' block, trigger 'data loaded' function
+	});
 }
 
-for (var index in structures) {
-	
-	var structure = structures[index];
-		
-	Monolith.Structures[structure.name] = structure;
-	
-	// if(structure.research) addItemToMenu("#lab-research", structure);
-	
-	// else addItemToMenu("#ui-build-menu", structure);
-	
-	if(!structure.unlockedOnFloor) addItemToMenu(structure);
-	
-	if(!structure.upgrades) continue;
-	
-	for(var i = 0; i < structure.upgrades.length; i++) {
-		
-		structure.upgrades[i] = Monolith.Upgrades[structure.upgrades[i].name];
-	}	
-}
-
-for (var index in towerUpgrades) {
-	
-	var towerUpgrade = towerUpgrades[index];
-		
-	Monolith.TowerUpgrades[towerUpgrade.name] = towerUpgrade;
-	
-	// addItemToMenu("#tower-upgrades", towerUpgrade);
-}
-
-Monolith.AllBuildables = jQuery.extend(jQuery.extend(Monolith.Structures, Monolith.Upgrades), Monolith.TowerUpgrades);
+getStructures(Monolith.GamePackages[0]);

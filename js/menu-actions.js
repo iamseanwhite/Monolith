@@ -181,7 +181,7 @@ function doBuild(structure) {
 	
 	var floorIndex = Monolith.GetXYForCol(activeElement);
 	
-	if(structure.structureType == "upgrade") upgradeFloorTile(floorIndex, upgrade);
+	if(structure.structureType == "upgrade") upgradeFloorTile(floorIndex, structure);
 	
 	else setFloorTile(floorIndex, structure);
 	

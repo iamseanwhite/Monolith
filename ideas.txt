@@ -20,3 +20,5 @@ Kitchen, and walk-in freezer.
 When rendering "3D": http://www.noeltock.com/tilt-shift-css3-jquery-plugin/
 
 Minification: http://stackoverflow.com/questions/9287823/combine-and-minify-multiple-css-js-files
+
+Upgrades should go back to being stored more simply in floor tiles

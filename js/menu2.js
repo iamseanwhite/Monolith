@@ -18,7 +18,7 @@ function researchMenuItemClick(itemName) {
 	
 	// TODO: How to determine which menu to go to? (currently research only applies to buildings ...)
 	
-	var structure = Monolith.Structures[itemName];
+	var structure = Monolith.AllBuildables[itemName];
 	
 	addItemToMenu("#ui-build-menu", structure);
 	
@@ -36,9 +36,9 @@ function removeFromResearchMenu(itemClass) {
 
 Monolith.UI.DisableUnresearchableResearch = function() {
 	
-	for(var structureName in Monolith.Structures) {
+	for(var structureName in Monolith.AllBuildables) {
 		
-		var structure = Monolith.Structures[structureName];
+		var structure = Monolith.AllBuildables[structureName];
 		
 		// TODO: Test if we can do .menu instead of specifying the menu
 		if(Monolith.Player.Resources.research < structure.research) jQuery("#lab-research ." + structure.name).addClass("disabled");
