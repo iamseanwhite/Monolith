@@ -56,8 +56,14 @@ body {
     text-align:center;
 }
 
-.monolith-floor .row, #ui-map .row {
+#ui-map .row {
     margin-bottom: -.2vw;  /* TODO: Fix it so that this doesn't need to be here. ... */
+}
+
+.monolith-floor .row {
+	
+    display: inline-block;
+    margin: 0px 3vw;
 }
 
 .monolith-floor .col, #ui-map .fa {
@@ -154,4 +160,10 @@ body {
 
 #monolith .fa {
 	font-size: .75em;
+}
+
+.enemy {
+	position: absolute;
+    color: red;
+    opacity: .65;
 }
