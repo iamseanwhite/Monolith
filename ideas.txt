@@ -5,8 +5,8 @@ next floor below at 50% opacity
 maybe separate out description from menu
 
 Achievements:
-Shooty McShootFace : have a turret with 100+ kills
-Slaughter: Have over 1000 total kills
+	Shooty McShootFace : have a turret with 100+ kills
+	Slaughter: Have over 1000 total kills
 
 Maybe rather than turrets have farms ... point is to create sustainable humanity?
 
