@@ -2,12 +2,12 @@ Monolith.Resources = {
 	"population" : { "Icon" : "fa-users"},
 	"materials" : { "Icon" : "fa-cubes"},
 	"research" : { "Icon" : "fa-flask"},
+	"kills" : { "Icon" : "fa-ban"},
 };
 
 Monolith.Player.Resources = {};
 Monolith.Player.Resources.population = 0;
 Monolith.Player.Resources.materials = 1000;
-Monolith.Player.Resources.research = 0;
 
 Monolith.PopPerHabitat = 10;
 Monolith.BankInterest = 0.01;
@@ -33,8 +33,7 @@ Monolith.CalculateMaterials = function() {
 var promptedYet = false;
 Monolith.CalculateResearch = function() {
 	
-	Monolith.Player.Resources.research = Monolith.Player.Resources.research + Monolith.GetStructureCount("Lab");
-	Monolith.UI.SetUIVariable("research", Monolith.Player.Resources.research);
+	incrementResource("research", Monolith.GetStructureCount("Lab"));
 	
 	/*
 	// TODO: And there's things that can be researched ... 
@@ -45,6 +44,12 @@ Monolith.CalculateResearch = function() {
 		Monolith.UI.HighlightMenuItem(jQuery("#ui-variables .Research"));
 	}
 	*/
+}
+
+Monolith.CalculateKills = function() {
+	
+	var turretKills = Monolith.GetStructureCount("Turret");
+	incrementResource("kills", turretKills);
 }
 
 Monolith.PayResource = function(resource, amount) {
@@ -60,8 +65,17 @@ Monolith.PayResource = function(resource, amount) {
 	return true;
 }
 
+incrementResource = function(resource, amount) {
+	
+	if(!Monolith.Player.Resources[resource]) Monolith.Player.Resources[resource] = 0;
+	Monolith.Player.Resources[resource] = Monolith.Player.Resources[resource] + amount;
+	Monolith.UI.SetUIVariable(resource, Monolith.Player.Resources[resource]);
+}
+
 setInterval(Monolith.CalculatePopulation, 5000);
 
 setInterval(Monolith.CalculateMaterials, 2500);
 
 setInterval(Monolith.CalculateResearch, 10000);
+
+// setInterval(Monolith.CalculateKills, 5000);
