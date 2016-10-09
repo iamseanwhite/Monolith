@@ -2,17 +2,6 @@
 // TODO: No hyphens in property names (looking at you, ui-class)
 
 var structures = [
-/*
-   {
-      "name" : "Turret",
-	 "ui-class":"fa-crosshairs",
-	 "description":"Shoots stuff.",
-	 "upgrades":[
-		"Range",
-		"Firing Speed"
-	 ]
-   },
-*/
    {
       "name" : "Stairs",
 	  /*

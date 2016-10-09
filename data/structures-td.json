@@ -1,0 +1,12 @@
+[
+   {
+      "name" : "Turret",
+	 "ui-class":"fa-crosshairs",
+	 "description":"Shoots stuff.",
+	 "materials" : "250",
+	 "upgrades":[
+		"Range",
+		"Firing Speed"
+	 ]
+   }
+]
