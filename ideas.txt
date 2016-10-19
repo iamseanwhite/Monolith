@@ -22,3 +22,7 @@ When rendering "3D": http://www.noeltock.com/tilt-shift-css3-jquery-plugin/
 Minification: http://stackoverflow.com/questions/9287823/combine-and-minify-multiple-css-js-files
 
 Upgrades should go back to being stored more simply in floor tiles
+
+Maybe population should increase faster with more (either more pop or more habitats)
+
+Background images changes as tower gets higher ... you can reach cloud level then space level where aliens are like wtfmate pew pew.
