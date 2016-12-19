@@ -1,3 +1,6 @@
+Current item:
+	Turrets shoot and monsters take damage
+
 Previous floor above at 50% opacity
 
 next floor below at 50% opacity
@@ -21,8 +24,22 @@ When rendering "3D": http://www.noeltock.com/tilt-shift-css3-jquery-plugin/
 
 Minification: http://stackoverflow.com/questions/9287823/combine-and-minify-multiple-css-js-files
 
+Change game modes using get parameters: http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
+
 Upgrades should go back to being stored more simply in floor tiles
 
 Maybe population should increase faster with more (either more pop or more habitats)
 
 Background images changes as tower gets higher ... you can reach cloud level then space level where aliens are like wtfmate pew pew.
+
+Menu always visible
+Visual up arrow somewhere (next to stairs?)
+Platform bigger
+
+Blinking icon on the screen indicating current "need"
+	Beds, then stairs, then monsters
+
+Start with one turret
+Visual cue for attention is required at base
+
+Number the floors

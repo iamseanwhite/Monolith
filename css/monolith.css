@@ -39,7 +39,7 @@ body {
 	overflow: hidden;
 	perspective: 3000;
 	
-	font-size: 5vw;
+	font-size: 1em;
 }
 
 #main, #message-overlay {		
@@ -57,13 +57,16 @@ body {
 }
 
 #ui-map .row {
-    margin-bottom: -.2vw;  /* TODO: Fix it so that this doesn't need to be here. ... */
+    margin-bottom: -4em;  /* TODO: Fix it so that this doesn't need to be here. ... */
 }
 
 .monolith-floor .row {
-	
+
+/*	
     display: inline-block;
-    margin: 0px 3vw;
+    margin: 0px 225px;
+*/
+    margin-bottom: -.4em;
 }
 
 .monolith-floor .col, #ui-map .fa {
@@ -75,7 +78,7 @@ body {
 	transition: all .2s ease-in-out;
 	
 	vertical-align: text-bottom;
-    font-size: 3em;
+    font-size: 7em;
     text-align: center;	
 }
 
