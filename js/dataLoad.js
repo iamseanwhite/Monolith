@@ -8,7 +8,11 @@ getStructures = function(packageName) {
 	// TODO: A code branch should be added to handle get failure
 	jQuery.get("data/" + packageName + ".json").done(function(data) {
 		
-		var structures = JSON.parse(data);
+		if (typeof data === 'string' || data instanceof String) {		
+			var structures = JSON.parse(data);
+		} else {
+			var structures = data;
+		}
 		
 		for (var index in structures) {
 			
