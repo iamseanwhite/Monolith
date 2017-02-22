@@ -19,8 +19,6 @@ Monolith.UI.Hint = function(name, message, delay) {
 
 Monolith.UI.ClearHint = function(name) {
 
-	console.log("Clearing hint " + name);
-
 	if(name in Monolith.UI.Hints) {
 
 		clearTimeout(Monolith.UI.Hints[name]);

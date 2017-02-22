@@ -1,6 +1,11 @@
 Monolith.AllBuildables = {};
 Monolith.GamePackages = ["upgrades", "structures", "upgrades-td", "structures-td"];
 
+Monolith.OnDataLoad = function() {
+	
+	jQuery("body").append('<script src="js/game-start.js"><\/script>');
+};
+
 getStructures = function(packageName) {
 	
 	Monolith.GamePackages.shift();
@@ -18,7 +23,6 @@ getStructures = function(packageName) {
 			
 			var structure = structures[index];
 				
-			// Monolith.Structures[structure.name] = structure;
 			Monolith.AllBuildables[structure.name] = structure;
 			
 			if(!structure.unlockedOnFloor) addItemToMenu(structure);
@@ -32,8 +36,12 @@ getStructures = function(packageName) {
 		}
 		
 		if(Monolith.GamePackages.length > 0) getStructures(Monolith.GamePackages[0]);
-		else delete Monolith.GamePackages;
-		// TODO: Inside above 'else' block, trigger 'data loaded' function
+		else {
+
+			delete Monolith.GamePackages;
+
+			Monolith.OnDataLoad();
+		}
 	});
 }
 
