@@ -1,6 +1,6 @@
 function monolithTileClicked(floorTile) {
 	
-	clearTimeout(notifyBuildHint);
+	if(notifyBuildHint) clearTimeout(notifyBuildHint);
 	
 	jQuery("#monolith .col.active").removeClass("active");
 	
