@@ -1,6 +1,7 @@
+
 function monolithTileClicked(floorTile) {
 	
-	if(notifyBuildHint) clearTimeout(notifyBuildHint);
+	if(typeof notifyBuildHint !== 'undefined') clearTimeout(notifyBuildHint);
 	
 	jQuery("#monolith .col.active").removeClass("active");
 	
@@ -206,9 +207,9 @@ function structureAdded(structure) {
 	
 	if(structure.structureType == "tower-upgrade") removeMenuItem(structure.name);
 	
-	if(structure.name == "Habitat") clearTimeout(notifyShelterHint);
+	Monolith.UI.ClearHint("Habitat");
 	
-	if(structure.name == "Lab") clearTimeout(notifyLabHint);
+	Monolith.UI.ClearHint("Lab");
 	
 	if(structure.name == "McFattys") Monolith.IncreaseMaxFloorSize(1, 0);
 	

@@ -1,15 +1,32 @@
 
-Monolith.UI.Hint = function(message) {
+Monolith.UI.Hints = {};
+
+Monolith.UI.Hint = function(name, message, delay) {
 	
-	jQuery("#message-overlay div")
-		.append('<span class="hint">' + message + '</span>');
-		
-	setTimeout(function() {
-		jQuery("#message-overlay .hint")
-			.css("opacity", ".7");
-		}, 20);
-		
-	Monolith.UI.FadeMessageOut(4200);
+	Monolith.UI.Hints[name] = setTimeout(function() {
+
+		jQuery("#message-overlay div")
+			.append('<span class="hint">' + message + '</span>');
+			
+		setTimeout(function() {
+			jQuery("#message-overlay .hint")
+				.css("opacity", ".7");
+			}, 20);
+			
+		Monolith.UI.FadeMessageOut(4200);
+	}, delay);
+}
+
+Monolith.UI.ClearHint = function(name) {
+
+	console.log("Clearing hint " + name);
+
+	if(name in Monolith.UI.Hints) {
+
+		clearTimeout(Monolith.UI.Hints[name]);
+
+		delete Monolith.UI.Hints[name];
+	}
 }
 
 Monolith.UI.Message = function(message) {
