@@ -5,13 +5,13 @@
 	to { background-position: 10% 100%; }
 }
 
-body {
+body.animated {
 	
-	/* TODO: Disable this on battery operated devices I guess ... seems to be CPU intensive */
-	/* animation: animatedBackground 50s linear infinite; */
+	animation: animatedBackground 50s linear infinite;
 }
 
 #message-overlay h1 {
+
 	color: black;
 	font-family: "Century Gothic";
     font-size: 20vw;
@@ -22,7 +22,7 @@ body {
 	transition: 1s font ease-in-out, 2s opacity linear;
 }
 
-#message-overlay .hint {
+.ui-message {
 	
 	background-color: var(--main-bg-color);	
 	color: var(--main-fg-color);
@@ -33,6 +33,14 @@ body {
     opacity: 0;
 	
 	transition: 2s opacity linear;
+}
+
+.ui-message .close {
+	
+	color: gray;
+	padding-left: 16px;
+	cursor: pointer;
+    font-size: 1em;
 }
 
 #ui-variables div {
@@ -63,10 +71,4 @@ body {
 	background-size: 300%;
 	
 	transition : all 1s ease-in-out;
-}
-
-#message-overlay div {
-	
-	vertical-align : top;
-	padding-top : 15%;
 }

@@ -149,12 +149,15 @@ body {
 
 #message-overlay {
 	position: absolute;
-	z-index: -5;
+	z-index: 5;
+    height: 0;
 }
 
 #message-overlay div {
 	text-align: center;
     display: table-cell;
+	vertical-align : top;
+	padding-top : 8%;
 }
 
 #ui-map.mcfattys:before {

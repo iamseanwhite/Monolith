@@ -61,3 +61,9 @@ Monolith.Juice.MenuOpen = function(menu) {
 		jQuery(menu).css("max-height", "100%");
 	}, 1);
 }
+
+// If the device is NOT on battery, crank up the juice!
+navigator.getBattery().then(function(battery) { 
+	
+	if(battery.charging) jQuery("body").addClass("animated");
+});

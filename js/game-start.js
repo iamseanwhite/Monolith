@@ -2,6 +2,7 @@ jQuery(window).trigger('resize');
 
 Monolith.UI.SetUIVariable("materials", Monolith.Player.Resources.materials);
 
+/*
 Monolith.UI.TitleMessage('<h1>Monolith</h1>');
 
 var notifyShelterHint = setTimeout(function() {
@@ -14,7 +15,8 @@ var notifyBuildHint = setTimeout(function() {
 
 var notifyLabHint = setTimeout(function() {
 	Monolith.UI.Hint('<i class="fa ' + Monolith.AllBuildables.Lab["ui-class"] + '"/> = <i class="fa fa-smile-o" />');
-	}, 27000);
+}, 27000);
+*/
 	
 // TODO: Hint highlight for research menu ...
 	

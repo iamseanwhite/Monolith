@@ -1,8 +1,7 @@
+
 Monolith.UI.Hint = function(message) {
 	
 	jQuery("#message-overlay div")
-		// .css("vertical-align", "middle")
-		// .css("padding-top", "0")
 		.append('<span class="hint">' + message + '</span>');
 		
 	setTimeout(function() {
@@ -11,6 +10,32 @@ Monolith.UI.Hint = function(message) {
 		}, 20);
 		
 	Monolith.UI.FadeMessageOut(4200);
+}
+
+Monolith.UI.Message = function(message) {
+	
+	jQuery("#message-overlay div")
+		.append('<span class="ui-message">' + 
+			'<span class="message">' + message + '</span> ' + 
+			' <span class="close">x</span>' + 
+			'</span>');
+
+		var message = jQuery(".ui-message").last();
+		
+	setTimeout(function() {
+		message.css("opacity", ".9");
+	}, 20);
+
+	// TODO: Fade out faster than it faded in ...
+	message.children(".close").click(function(event) {
+		
+		var messageParent = this.parentNode;
+		jQuery(messageParent).css("opacity", "0");
+
+		setTimeout(function() {
+			messageParent.remove();
+		}, 2000);
+	});
 }
 
 Monolith.UI.TitleMessage = function(message) {
