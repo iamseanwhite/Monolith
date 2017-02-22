@@ -13,7 +13,7 @@ Monolith.UI.Hint = function(name, message, delay) {
 				.css("opacity", ".7");
 			}, 20);
 			
-		Monolith.UI.FadeMessageOut(4200);
+		Monolith.UI.FadeMessageOut(4200, ".hint");
 	}, delay);
 }
 
@@ -56,24 +56,23 @@ Monolith.UI.Message = function(message) {
 Monolith.UI.TitleMessage = function(message) {
 	
 	jQuery("#message-overlay div")
-		.append('<span>' + message + '</span>');
+		.append('<span class="title">' + message + '</span>');
 		
 	setTimeout(function() {
 		jQuery("#message-overlay h1").css("opacity", ".9");
 		}, 1);
 		
-	Monolith.UI.FadeMessageOut(3000);
+	Monolith.UI.FadeMessageOut(3000, "h1");
 }
 
-Monolith.UI.FadeMessageOut = function(time) {
+Monolith.UI.FadeMessageOut = function(time, messageClass) {
 		
 	setTimeout(function() {
-		jQuery("#message-overlay span h1").css("opacity", "0");
-		jQuery("#message-overlay .hint").css("opacity", "0");
+		jQuery("#message-overlay " + messageClass).css("opacity", "0");
 		}, time);
 		
 	setTimeout(function() {
-		jQuery("#message-overlay span").remove();
+		jQuery("#message-overlay " + messageClass).remove();
 		}, time + 2000);	
 }
 

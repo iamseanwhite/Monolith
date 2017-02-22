@@ -1,5 +1,7 @@
 Monolith.UI = {};
 
+// TODO: Objectives 
+
 Monolith.UI.SetUIVariable = function(name, value) {
 	
 	// TODO: Can we take this out of the div maybe?
