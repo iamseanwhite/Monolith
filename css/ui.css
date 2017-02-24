@@ -1,3 +1,4 @@
+
 #ui-map .fa {	
     transform: rotateX(60deg) rotateZ(45deg);
 }
@@ -7,24 +8,31 @@
 	transform: rotateZ(180deg);
 }
 
-#ui-variables {
+#ui-variables, #ui-objectives {
 	position: absolute;
-	right: 0;
+	right: 4px;
 	top: 0;
 	color: var(--main-bg-color);
 	/* background-color: var(--main-bg-color); */
 	opacity: var(--ui-opacity);
-}
-
-#ui-variables div {
-	display: inline-block;
-	padding: 2px;
-	margin: 2px;	
-}
-
-#ui-variables div { /*, #ui-variables i { */
 	
 	text-shadow: 2px 2px 0px black;	
+	text-align: center;
+}
+
+#ui-variables div, #ui-objectives div {
+	display: inline-block;
+	padding: 2px;
+	margin: 2px;
+}
+
+#ui-objectives {
+	left: 4px;
+	right: auto;
+}
+
+.ui hr {
+	margin: 0px;
 }
 
 .menu {	

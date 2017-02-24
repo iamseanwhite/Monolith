@@ -1,6 +1,8 @@
-Monolith.UI = {};
 
-// TODO: Objectives 
+Monolith.UI = {};
+Monolith.UI.Objectives = [];
+
+// TODO: Add some juice to the way the numbers change
 
 Monolith.UI.SetUIVariable = function(name, value) {
 	
@@ -15,6 +17,35 @@ Monolith.UI.SetUIVariable = function(name, value) {
 	
 	jQuery("#ui-variables div." + name).html('<i title="' + name + '" class="fa ' + Monolith.Resources[name].Icon + '"> ' + value + '</i>');
 }
+
+Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
+
+	Monolith.UI.Objectives.push({
+		"displayFunc" : displayFunc,
+		"criteriaFunc" : criteriaFunc,
+		"completeFunc" : completeFunc
+	});
+
+	var objectiveId =  Monolith.UI.Objectives.length - 1;
+
+	jQuery("#ui-objectives").append('<div id="objective' + objectiveId + '"></div>');
+
+	return objectiveId;
+}
+
+Monolith.UI.ObjectiveInterval = setInterval(function() {
+
+	for(var i = 0; i < Monolith.UI.Objectives.length; i++) {
+		
+		var objective = Monolith.UI.Objectives[i];
+
+		var objectiveText = objective.displayFunc();
+
+		jQuery("#objective" + i).html(objectiveText);
+
+		// criteriafunc ...
+	}
+}, 2500);
 
 jQuery(function() { // Sorry, got lazy
 
@@ -78,6 +109,7 @@ jQuery("body").bind('mousewheel', function(e) {
 });
 
 jQuery("#btn-reset-monolith-rotation").click(function() {
+
 	$("#monolith").css("transform", "rotateX(45deg) rotateZ(45deg)");
 	
 	jQuery("#btn-reset-monolith-rotation").hide();

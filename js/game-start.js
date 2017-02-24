@@ -22,7 +22,16 @@ Monolith.UI.Hint("Lab",
 */
 
 setTimeout(function() {
-	Monolith.UI.Message('You will need a workforce. Build enough <i class="fa ' + Monolith.AllBuildables.Habitat["ui-class"] + '"/> to support 300 population.');
+
+	Monolith.UI.Message('You will need a workforce. Build enough <i class="fa ' 
+		+ Monolith.AllBuildables.Habitat["ui-class"] 
+		+ '"/> to support 300 <i class="fa ' + Monolith.Resources["population"].Icon + '"/>');
+
+	Monolith.UI.AddObjective(
+		function() { return Monolith.Player.Resources.population + ' / 300 <i class=\"fa ' + Monolith.Resources["population"].Icon + '\"/>'; },
+		function() { return Monolith.Player.Resources.population == 300; },
+		null
+		)
 }, 5200);
 	
 // TODO: Hint highlight for research menu ...
