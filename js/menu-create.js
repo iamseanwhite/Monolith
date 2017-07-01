@@ -41,6 +41,21 @@ function addItemToMenu(menuItem) {
 	uiStyles.appendChild(document.createTextNode(menu + ' .' + menuItem["name"] + ':hover ~ .description:after { content: \'' + menuItem.description + '\'; }'));
 }
 
+Monolith.RepaintMenuItem = function(structure) {
+
+	var menuItemCost = '';
+		
+	if(structure.materials) menuItemCost += '<i class="fa ' + Monolith.Resources["materials"].Icon + '">' + structure.materials + '</i>';
+
+	if(structure.population) menuItemCost += '<i class="fa ' + Monolith.Resources["population"].Icon + '">' + structure.population + '</i>';
+	
+	var itemClass = structure["ui-class"] + ' ' + structure["name"];
+
+	jQuery(".menu ." + structure["name"]).html('<i class="fa ' + itemClass + '"></i>' +
+		'<br />' + menuItemCost);
+
+}
+
 Monolith.IsResearched = function(menuItem) {
 	
 	return !(menuItem.research && menuItem.research > 0 && jQuery.inArray(menuItem, Monolith.ResearchedItems) == -1);

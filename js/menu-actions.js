@@ -171,6 +171,8 @@ function doBuild(structure) {
 	if(structure.materials) if(!Monolith.PayResource("materials", structure.materials)) return;
 	
 	if(structure.population) if(!Monolith.PayResource("population", structure.population)) return;
+
+	Monolith.RecalculateCost(structure);
 		
 	var activeElement = jQuery("#monolith .col.active");
 	

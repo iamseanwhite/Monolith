@@ -1,5 +1,9 @@
 Current item:
-	Turrets shoot and monsters take damage
+	Turrets shoot and monsters take damage and die
+
+Switch back to popup menu
+	Make it so that tapping anywhere but the menu closes the menu
+	Play with various sizes .. maybe try to make menu items small enough to allow clicking on tiles they obstruct
 
 Previous floor above at 50% opacity
 
@@ -42,4 +46,9 @@ Blinking icon on the screen indicating current "need"
 Start with one turret
 Visual cue for attention is required at base
 
-Number the floors
+Display Number the floors
+
+Method to compute cost of a thing
+All things go up in cost with each purchase
+
+Higher population = higher population growth rate

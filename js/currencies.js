@@ -7,7 +7,7 @@ Monolith.Resources = {
 
 Monolith.Player.Resources = {};
 Monolith.Player.Resources.population = 0;
-Monolith.Player.Resources.materials = 1000;
+Monolith.Player.Resources.materials = 100;
 
 Monolith.PopPerHabitat = 10;
 Monolith.BankInterest = 0.01;
@@ -63,6 +63,28 @@ Monolith.PayResource = function(resource, amount) {
 	Monolith.UI.SetUIVariable(resource, Monolith.Player.Resources[resource]);
 	
 	return true;
+}
+
+Monolith.RecalculateCost = function(structure) {
+
+	console.log(structure);
+
+	if(structure.structureType == "upgrade") {
+
+		structure.materials = structure.materials * 1.25;
+
+		return;
+	}
+
+	structure.materials = structure.materials * 1.5;
+
+	for(var upgrade in structure.upgrades) {
+
+		structure.upgrades[upgrade].materials = structure.upgrades[upgrade].materials * 1.1;
+		Monolith.RepaintMenuItem(structure.upgrades[upgrade]);
+	}
+
+	Monolith.RepaintMenuItem(structure);
 }
 
 incrementResource = function(resource, amount) {

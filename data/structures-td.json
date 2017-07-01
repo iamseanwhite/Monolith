@@ -3,7 +3,7 @@
       "name" : "Turret",
 	 "ui-class":"fa-crosshairs",
 	 "description":"Shoots stuff.",
-	 "materials" : "250",
+	 "materials" : "35",
 	 "upgrades":[
 		"Range",
 		"Firing Speed"
