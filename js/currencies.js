@@ -69,16 +69,16 @@ Monolith.RecalculateCost = function(structure) {
 
 	if(structure.structureType == "upgrade") {
 
-		structure.materials = structure.materials * 1.25;
+		structure.materials = Math.floor(structure.materials * 1.15);
 
 		return;
 	}
 
-	structure.materials = structure.materials * 1.5;
+	structure.materials = Math.floor(structure.materials * 1.3);
 
 	for(var upgrade in structure.upgrades) {
 
-		structure.upgrades[upgrade].materials = structure.upgrades[upgrade].materials * 1.1;
+		structure.upgrades[upgrade].materials = Math.floor(structure.upgrades[upgrade].materials * 1.1);
 		Monolith.RepaintMenuItem(structure.upgrades[upgrade]);
 	}
 

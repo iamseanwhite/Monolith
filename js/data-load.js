@@ -10,6 +10,8 @@ getStructures = function(packageName) {
 	
 	Monolith.GamePackages.shift();
 
+	// TODO: the lab shouldnt unlock until something else can be researched
+
 	// TODO: A code branch should be added to handle get failure
 	jQuery.get("data/" + packageName + ".json").done(function(data) {
 		
