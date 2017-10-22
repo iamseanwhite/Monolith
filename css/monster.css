@@ -1,0 +1,10 @@
+.enemy {
+    
+    color: red;
+    opacity: .65;
+
+    position: relative;
+
+    left: 90%;
+    top: 0;
+}

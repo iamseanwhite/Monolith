@@ -67,8 +67,6 @@ Monolith.PayResource = function(resource, amount) {
 
 Monolith.RecalculateCost = function(structure) {
 
-	console.log(structure);
-
 	if(structure.structureType == "upgrade") {
 
 		structure.materials = structure.materials * 1.25;

@@ -56,4 +56,4 @@ Monolith.Monsters.Act = function() {
 	}
 }
 
-setInterval(Monolith.Monsters.CalculateMonsterSpawns, 7200);
+// setInterval(Monolith.Monsters.CalculateMonsterSpawns, 7200);

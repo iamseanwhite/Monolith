@@ -14,6 +14,11 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
+function randomBetween(first, second) {
+
+    return Math.floor(Math.random() * second) + first;
+}
+
 // TODO: We may not have to do this if we're properly capturing mouse move where we expect to ...
 
 jQuery( window ).resize(function() {
