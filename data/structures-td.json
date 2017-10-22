@@ -5,8 +5,8 @@
 	 "description":"Shoots stuff.",
 	 "materials" : "35",
 	 "upgrades":[
-		"Range",
-		"Firing Speed"
+		{ "name": "Range" },
+		{ "name": "Firing Speed" }
 	 ]
    }
 ]

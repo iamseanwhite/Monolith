@@ -1,9 +1,17 @@
 [
    {
-      "name" : "Bunk Beds",
+      "name" : "Range",
 	  "structureType" : "upgrade",
-	 "ui-class":"fa-bed",
-	 "description":"Habitat supports 10 more population.",
+	 "ui-class":"fa-crosshairs",
+	 "description":"Turret shoots further.",
+	 "materials" : "120",	 
+	 "unlockedOnFloor" : 3
+   },
+   {
+      "name" : "Firing Speed",
+	  "structureType" : "upgrade",
+	 "ui-class":"fa-crosshairs",
+	 "description":"Turret shoots faster.",
 	 "materials" : "120",	 
 	 "unlockedOnFloor" : 3
    }
