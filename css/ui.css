@@ -28,6 +28,11 @@
 #ui-objectives {
 	left: 4px;
 	right: auto;
+	display: none;
+}
+
+#ui-objectives .objective {
+	display: none;
 }
 
 .ui hr {

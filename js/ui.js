@@ -28,7 +28,11 @@ Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
 
 	var objectiveId =  Monolith.UI.Objectives.length - 1;
 
-	jQuery("#ui-objectives").append('<div id="objective' + objectiveId + '"></div>');
+	jQuery("#ui-objectives").append('<div id="objective' + objectiveId + '" class="objective">' + displayFunc() + '</div>');
+	
+	jQuery("#ui-objectives").fadeIn(1000);
+	
+	jQuery("#ui-objectives .objective").fadeIn(1000);
 
 	return objectiveId;
 }
