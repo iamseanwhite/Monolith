@@ -1,7 +1,7 @@
 [
    {
-      "name" : "Bunk Beds",
-	  "structureType" : "upgrade",
+     "name" : "Bunk Beds",
+	 "structureType" : "upgrade",
 	 "ui-class":"fa-bed",
 	 "description":"Habitat supports 10 more population.",
 	 "materials" : "120",	 

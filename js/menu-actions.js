@@ -149,7 +149,7 @@ Monolith.DoResearch = function(buildItem) {
 	
 	Monolith.ResearchedItems.push(buildItem);
 	
-	// TODO: loop through materials
+	// TODO: loop through materials (did I mean resources ... ?)
 	var newHtml = "";
 	if(buildItem.materials) newHtml += '<i class="fa ' + Monolith.Resources["materials"].Icon + '">' + buildItem.materials + '</i>';	
 	if(buildItem.population) newHtml += '<i class="fa ' + Monolith.Resources["population"].Icon + '">' + buildItem.population + '</i>';
@@ -214,6 +214,9 @@ function structureAdded(structure) {
 	Monolith.UI.ClearHint("Lab");
 	
 	if(structure.name == "McFattys") Monolith.IncreaseMaxFloorSize(1, 0);
+
+	// TODO: Monolith.UI.RefreshUIVariables function
+	if(structure.name == "Habitat" || structure.name == "Bunk Beds") Monolith.CalculatePopulation();
 	
 	if(structure.isStairs) { 
 	

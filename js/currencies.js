@@ -14,11 +14,14 @@ Monolith.BankInterest = 0.01;
 
 Monolith.CalculatePopulation = function() {
 	
-	var maxPop = (Monolith.GetStructureCount("Habitat") * Monolith.PopPerHabitat) + (Monolith.GetStructureCount("Bunk Beds") * Monolith.PopPerHabitat);
+	var maxPop = 
+		(Monolith.GetStructureCount("Habitat") * Monolith.PopPerHabitat) +
+		(Monolith.GetStructureCount("Bunk Beds") * Monolith.PopPerHabitat);
+
 	if(Monolith.Player.Resources.population < maxPop) Monolith.Player.Resources.population = Monolith.Player.Resources.population + 1;
 	if (Monolith.Player.Resources.population > maxPop) Monolith.Player.Resources.population = maxPop;
 	
-	Monolith.UI.SetUIVariable("population", Monolith.Player.Resources.population);
+	Monolith.UI.SetUIVariable("population", Monolith.Player.Resources.population, maxPop);
 }
 
 Monolith.CalculateMaterials = function() {
@@ -30,7 +33,7 @@ Monolith.CalculateMaterials = function() {
 	Monolith.UI.SetUIVariable("materials", Monolith.Player.Resources.materials);
 }
 
-var promptedYet = false;
+var promptedYet = false;	// We can change "promptedYet" to a "lastPromptTime" variable with an initial value like null
 Monolith.CalculateResearch = function() {
 	
 	incrementResource("research", Monolith.GetStructureCount("Lab"));

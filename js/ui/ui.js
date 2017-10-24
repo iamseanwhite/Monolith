@@ -4,7 +4,7 @@ Monolith.UI.Objectives = [];
 
 // TODO: Add some juice to the way the numbers change
 
-Monolith.UI.SetUIVariable = function(name, value) {
+Monolith.UI.SetUIVariable = function(name, value, max) {
 	
 	// TODO: Can we take this out of the div maybe?
 	
@@ -14,8 +14,14 @@ Monolith.UI.SetUIVariable = function(name, value) {
 		
 		jQuery("#ui-variables").append('<div class="' + name + '"></div>');
 	}
+
+	var uiText = '<i title="' + name + '" class="fa ' + Monolith.Resources[name].Icon + '"> ' + value;
+
+	if(max) uiText += ' / ' + max;
+
+	uiText += '</i>';
 	
-	jQuery("#ui-variables div." + name).html('<i title="' + name + '" class="fa ' + Monolith.Resources[name].Icon + '"> ' + value + '</i>');
+	jQuery("#ui-variables div." + name).html(uiText);
 }
 
 Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
