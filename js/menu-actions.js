@@ -69,17 +69,18 @@ Monolith.UI.DisableUnbuildableStructures = function(menu) {
 		
 		for(var resource in Monolith.Player.Resources) {
 				
-			if(Monolith.Player.Resources[resource] < structure[resource]) jQuery(".menu ." + structureClassName).addClass("disabled");
+			if(structure[resource] && Monolith.Resources.Get(resource) < structure[resource]) 
+				jQuery(".menu ." + structureClassName).addClass("disabled");
 		}
 		
 		/*
 		if(!Monolith.IsResearched(structure)) {
 			
-			if(Monolith.Player.Resources.research < structure.research) jQuery(".menu ." + structureClassName).addClass("disabled");
+			if(Monolith.Resources.Get("research") < structure.research) jQuery(".menu ." + structureClassName).addClass("disabled");
 			else jQuery(".menu ." + structureClassName).removeClass("disabled");			
 		} else {
 			
-			if(Monolith.Player.Resources.materials < structure.materials) jQuery(".menu ." + structureClassName).addClass("disabled");
+			if(Monolith.Resources.Get("materials") < structure.materials) jQuery(".menu ." + structureClassName).addClass("disabled");
 			else jQuery(".menu ." + structureClassName).removeClass("disabled");
 		}
 		*/

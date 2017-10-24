@@ -24,6 +24,7 @@ Monolith.UI.SetUIVariable = function(name) {
 	jQuery("#ui-variables div." + name).html(uiText + '</i>');
 	
 	Monolith.UI.ObjectiveInterval();
+	Monolith.UI.DisableUnbuildableStructures();
 }
 
 Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {

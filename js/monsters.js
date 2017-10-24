@@ -8,7 +8,7 @@ Monolith.Monsters.Active = [];
 
 Monolith.Monsters.CalculateMonsterSpawns = function() {
 	
-	if(Monolith.Player.Resources.population > 11) Monolith.Monsters.SpawnMonster();
+	if(Monolith.Resources.Get("population") > 11) Monolith.Monsters.SpawnMonster();
 }
 
 Monolith.Monsters.SpawnMonster = function() {
