@@ -7,7 +7,7 @@
 
 body.animated {
 	
-	animation: animatedBackground 50s linear infinite;
+	animation: animatedBackground 30s linear infinite;
 }
 
 #message-overlay h1 {
