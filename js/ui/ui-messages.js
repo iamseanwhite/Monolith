@@ -27,6 +27,7 @@ Monolith.UI.ClearHint = function(name) {
 	}
 }
 
+// TODO: multiple Messages are coming side-by-side rather than stacked veritcally
 Monolith.UI.Message = function(message) {
 	
 	jQuery("#message-overlay div")

@@ -54,6 +54,7 @@ Monolith.Resources.Add = function(resourceName, value) {
 }
 
 // TODO: Calculate methods can become part of the resource definition ... (as can recalculate interval ...)
+// May have to use 'eval' ...
 Monolith.CalculatePopulation = function() {
 
 	Monolith.Resources.Add("population", 1);
