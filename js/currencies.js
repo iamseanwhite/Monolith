@@ -5,38 +5,74 @@ Monolith.Resources = {
 	"kills" : { "Icon" : "fa-ban"},
 };
 
-Monolith.Player.Resources = {};
-Monolith.Player.Resources.population = 0;
-Monolith.Player.Resources.materials = 100;
+Monolith.Resources.MaxPopPerHabitat = 10;
+Monolith.Resources.MaterialsPerPop = 0.2;
+Monolith.Resources.BankInterest = 0.01;
 
-Monolith.PopPerHabitat = 10;
-Monolith.BankInterest = 0.01;
+Monolith.Player.Resources = {
 
+	"population": {
+		"Icon": "fa-users",
+		"max": function() { 
+			return (Monolith.GetStructureCount("Habitat") * Monolith.Resources.MaxPopPerHabitat) +
+			(Monolith.GetStructureCount("Bunk Beds") * Monolith.Resources.MaxPopPerHabitat); }
+	},
+	"materials": {
+		"Icon": "fa-cubes",
+		"value": 100
+	},
+	"research" : { 
+		"Icon" : "fa-flask"
+	},
+	"kills" : {
+		"Icon" : "fa-ban"
+	},
+};
+
+Monolith.Resources.Get = function(resourceName) {
+
+	if(!Monolith.Player.Resources[resourceName].value) return 0;
+
+	return Monolith.Player.Resources[resourceName].value;
+}
+
+Monolith.Resources.Set = function(resourceName, value) {
+
+	if(Monolith.Player.Resources[resourceName].max && value > Monolith.Player.Resources[resourceName].max())
+		Monolith.Player.Resources[resourceName].value = Monolith.Player.Resources[resourceName].max();
+	else
+		Monolith.Player.Resources[resourceName].value = Math.floor(value);
+
+	Monolith.UI.SetUIVariable(resourceName);
+}
+
+Monolith.Resources.Add = function(resourceName, value) {
+
+	if(value == 0) return;
+
+	Monolith.Resources.Set(resourceName, Monolith.Resources.Get(resourceName) + value);
+}
+
+// TODO: Calculate methods can become part of the resource definition ... (as can recalculate interval ...)
 Monolith.CalculatePopulation = function() {
-	
-	var maxPop = 
-		(Monolith.GetStructureCount("Habitat") * Monolith.PopPerHabitat) +
-		(Monolith.GetStructureCount("Bunk Beds") * Monolith.PopPerHabitat);
 
-	if(Monolith.Player.Resources.population < maxPop) Monolith.Player.Resources.population = Monolith.Player.Resources.population + 1;
-	if (Monolith.Player.Resources.population > maxPop) Monolith.Player.Resources.population = maxPop;
-	
-	Monolith.UI.SetUIVariable("population", Monolith.Player.Resources.population, maxPop);
+	Monolith.Resources.Add("population", 1);
 }
 
 Monolith.CalculateMaterials = function() {
 	
-	Monolith.Player.Resources.materials = Math.floor(Monolith.Player.Resources.materials + (Monolith.Player.Resources.population / 5));
-	
-	Monolith.Player.Resources.materials += Monolith.GetStructureCount("Bank") * Monolith.Player.Resources.materials * Monolith.BankInterest;
-	
-	Monolith.UI.SetUIVariable("materials", Monolith.Player.Resources.materials);
+	Monolith.Resources.Add("materials", Monolith.Resources.Get("population") * Monolith.Resources.MaterialsPerPop);
+
+	// calculate bank interest AFTER adding material from population
+	Monolith.Resources.Add("materials",
+		(Monolith.GetStructureCount("Bank") * Monolith.Resources.Get("materials") * Monolith.Resources.BankInterest)
+	);
 }
 
 var promptedYet = false;	// We can change "promptedYet" to a "lastPromptTime" variable with an initial value like null
 Monolith.CalculateResearch = function() {
 	
-	incrementResource("research", Monolith.GetStructureCount("Lab"));
+	Monolith.Resources.Add("research", Monolith.GetStructureCount("Lab"));
 	
 	/*
 	// TODO: And there's things that can be researched ... 
@@ -51,19 +87,18 @@ Monolith.CalculateResearch = function() {
 
 Monolith.CalculateKills = function() {
 	
+	// TODO: This is not at all how this should be calculated
 	var turretKills = Monolith.GetStructureCount("Turret");
-	incrementResource("kills", turretKills);
+	Monolith.Resources.Add("kills", turretKills);
 }
 
 Monolith.PayResource = function(resource, amount) {
 	
-	// TODO: Little animation when this happens. Maybe like a falling thing with a - amount
+	// TODO: (juice) Little animation when this happens. Maybe like a falling thing with a - amount
+
+	if(Monolith.Resources.Get(resource) < amount) return false;
 	
-	if(Monolith.Player.Resources[resource] < amount) return false;
-	
-	if(resource != "population") Monolith.Player.Resources[resource] -= amount;
-	
-	Monolith.UI.SetUIVariable(resource, Monolith.Player.Resources[resource]);
+	if(resource != "population") Monolith.Resources.Add(resource, amount * -1);
 	
 	return true;
 }
@@ -86,13 +121,6 @@ Monolith.RecalculateCost = function(structure) {
 	}
 
 	Monolith.RepaintMenuItem(structure);
-}
-
-incrementResource = function(resource, amount) {
-	
-	if(!Monolith.Player.Resources[resource]) Monolith.Player.Resources[resource] = 0;
-	Monolith.Player.Resources[resource] = Monolith.Player.Resources[resource] + amount;
-	Monolith.UI.SetUIVariable(resource, Monolith.Player.Resources[resource]);
 }
 
 setInterval(Monolith.CalculatePopulation, 5000);

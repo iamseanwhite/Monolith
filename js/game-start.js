@@ -1,6 +1,7 @@
 jQuery(window).trigger('resize');
 
-Monolith.UI.SetUIVariable("materials", Monolith.Player.Resources.materials);
+// TODO: Do this for all variables that init with non-zero value?
+Monolith.UI.SetUIVariable('materials');
 
 Monolith.UI.TitleMessage('<h1>Monolith</h1>');
 
@@ -22,6 +23,19 @@ Monolith.UI.Hint("Lab",
 */
 
 setTimeout(function() {
+	
+	Monolith.UI.Message('You will need a workforce. Build enough <i class="fa ' 
+		+ Monolith.AllBuildables.Habitat["ui-class"] 
+		+ '"/> to support 100 <i class="fa ' + Monolith.Resources["population"].Icon + '"/>');
+
+	Monolith.UI.AddObjective(
+		function() { return Monolith.Player.Resources.population + ' / 100 <i class=\"fa ' + Monolith.Resources["population"].Icon + '\"/>'; },
+		function() { return Monolith.Player.Resources.population == 300; },
+		null
+		)
+}, 5200);
+/*
+setTimeout(function() {
 
 	Monolith.UI.Message('You will need a workforce. Build enough <i class="fa ' 
 		+ Monolith.AllBuildables.Habitat["ui-class"] 
@@ -33,6 +47,7 @@ setTimeout(function() {
 		null
 		)
 }, 5200);
+*/
 	
 // TODO: Hint highlight for research menu ...
 	

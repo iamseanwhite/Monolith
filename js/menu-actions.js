@@ -215,7 +215,8 @@ function structureAdded(structure) {
 	
 	if(structure.name == "McFattys") Monolith.IncreaseMaxFloorSize(1, 0);
 
-	// TODO: Monolith.UI.RefreshUIVariables function
+	// Give the player 1 free pop with each bed ...
+	// Without this, we'll need to make pop display on first bed bought ...
 	if(structure.name == "Habitat" || structure.name == "Bunk Beds") Monolith.CalculatePopulation();
 	
 	if(structure.isStairs) { 
