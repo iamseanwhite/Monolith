@@ -4,30 +4,7 @@ Monolith.UI.Objectives = [];
 
 // TODO: Add some juice to the way the numbers change
 
-Monolith.UI.SetUIVariable = function(name, value, max) {
-
-	if(value == null) {
-		Monolith.UI.SetUIVariableFromName(name);
-		return;
-	} else {
-		console.log(name);
-	}
-	
-	if(!jQuery("#ui-variables div." + name).length) 
-	{
-		if(value == 0) return;
-		
-		jQuery("#ui-variables").append('<div class="' + name + '"></div>');
-	}
-
-	var uiText = '<i title="' + name + '" class="fa ' + Monolith.Resources[name].Icon + '"> ' + value;
-
-	if(max) uiText += ' / ' + max;
-	
-	jQuery("#ui-variables div." + name).html(uiText + '</i>');
-}
-
-Monolith.UI.SetUIVariableFromName = function(name) {
+Monolith.UI.SetUIVariable = function(name) {
 
 	var value = Monolith.Player.Resources[name].value;
 	if(Monolith.Player.Resources[name].max)
@@ -45,6 +22,8 @@ Monolith.UI.SetUIVariableFromName = function(name) {
 	if(max && max != 0) uiText += ' / ' + max;
 	
 	jQuery("#ui-variables div." + name).html(uiText + '</i>');
+	
+	Monolith.UI.ObjectiveInterval();
 }
 
 Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
@@ -55,6 +34,7 @@ Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
 		"completeFunc" : completeFunc
 	});
 
+	// TOOD: ID'ing this way is going to cause problems ... need a global objective ID, not an order ...
 	var objectiveId =  Monolith.UI.Objectives.length - 1;
 
 	jQuery("#ui-objectives").append('<div id="objective' + objectiveId + '" class="objective">' + displayFunc() + '</div>');
@@ -66,7 +46,7 @@ Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
 	return objectiveId;
 }
 
-Monolith.UI.ObjectiveInterval = setInterval(function() {
+Monolith.UI.ObjectiveInterval = function() {
 
 	for(var i = 0; i < Monolith.UI.Objectives.length; i++) {
 		
@@ -76,10 +56,19 @@ Monolith.UI.ObjectiveInterval = setInterval(function() {
 
 		jQuery("#objective" + i).html(objectiveText);
 
-		// TODO: if criteria func is met, call completeFunc
-		if(objective.criteriaFunc()) { console.log("Criteria met for objective " + i + "!"); }
+		if(objective.criteriaFunc()) { 
+			
+			Monolith.UI.Objectives.splice(i, 1);
+
+			jQuery("#ui-objectives #objective" + i).remove();
+
+			// TODO: dismiss any UI messages created by this objective
+			// (can try attaching classes to those messages and identifying that way)
+
+			objective.completeFunc();
+		}
 	}
-}, 2500);
+}
 
 jQuery(function() {
 
