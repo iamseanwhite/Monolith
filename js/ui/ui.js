@@ -2,6 +2,9 @@
 Monolith.UI = {};
 Monolith.UI.Objectives = [];
 
+jQuery("body").append('<script src="js/ui/ui-camera.js"><\/script>');
+jQuery("body").append('<script src="js/ui/ui-messages.js"><\/script>');
+
 // TODO: Add some juice to the way the numbers change
 
 Monolith.UI.SetUIVariable = function(name) {
@@ -27,26 +30,7 @@ Monolith.UI.SetUIVariable = function(name) {
 	Monolith.UI.DisableUnbuildableStructures();
 }
 
-Monolith.UI.AddObjective = function(displayFunc, criteriaFunc, completeFunc) {
-
-	Monolith.UI.Objectives.push({
-		"displayFunc" : displayFunc,
-		"criteriaFunc" : criteriaFunc,
-		"completeFunc" : completeFunc
-	});
-
-	// TOOD: ID'ing this way is going to cause problems ... need a global objective ID, not an order ...
-	var objectiveId =  Monolith.UI.Objectives.length - 1;
-
-	jQuery("#ui-objectives").append('<div id="objective' + objectiveId + '" class="objective">' + displayFunc() + '</div>');
-	
-	jQuery("#ui-objectives").fadeIn(1000);
-	
-	jQuery("#ui-objectives .objective").fadeIn(1000);
-
-	return objectiveId;
-}
-
+// TODO: rename
 Monolith.UI.ObjectiveInterval = function() {
 
 	for(var i = 0; i < Monolith.UI.Objectives.length; i++) {

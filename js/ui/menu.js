@@ -1,3 +1,7 @@
+
+jQuery("body").append('<script src="js/ui/menu-create.js"><\/script>');
+jQuery("body").append('<script src="js/ui/menu-actions.js"><\/script>');
+
 // TODO: All of these are actually to be removed ...
 
 function addMenu(menuId) {

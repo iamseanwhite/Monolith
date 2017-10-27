@@ -28,6 +28,7 @@ Monolith.UI.ClearHint = function(name) {
 }
 
 // TODO: multiple Messages are coming side-by-side rather than stacked veritcally
+// TODO: looks like maybe if there's two messages displayed, only one can be dismissed
 Monolith.UI.Message = function(message) {
 	
 	jQuery("#message-overlay div")
