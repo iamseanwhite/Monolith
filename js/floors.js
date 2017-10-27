@@ -203,9 +203,11 @@ Monolith.IncreaseMaxFloorSize = function(cols, rows) {
 	resetFloorItemClasses();
 }
 
-Monolith.GetStructureCount = function(structureName) {
+Monolith.GetStructureCount = function(structure) {
+
+	if(typeof structure != "string") structure = structure.name;
 	
-	return Monolith.StructureCount[structureName] || 0;
+	return Monolith.StructureCount[structure] || 0;
 }
 
 Monolith.GetFloorEntryForElement = function(element) {	

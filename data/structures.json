@@ -3,7 +3,7 @@
      "name" : "Stairs",
 	 "ui-class":"flaticon-stairs",
 	 "description":"Unlock the next tower floor.",
-	 "materials" : "75",
+	 "materials" : "50",
 	 "isStairs" : "true"
    },
    {
