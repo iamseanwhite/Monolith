@@ -19,6 +19,20 @@ function randomBetween(first, second) {
     return Math.floor(Math.random() * second) + first;
 }
 
+window.queryParams = {};
+var qps = window.location.href.split("?")[1];
+if(qps.length > 0) {
+    qps = qps.split("&");
+    for(var index in qps) {
+        var keyVal = qps[index].split("=");
+        window.queryParams[keyVal[0]] = keyVal[1];
+    }
+}
+
+window.getQueryParam = function(key) {
+    return window.queryParams[key];
+}
+
 // TODO: We may not have to do this if we're properly capturing mouse move where we expect to ...
 
 jQuery( window ).resize(function() {

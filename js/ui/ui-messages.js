@@ -2,6 +2,8 @@
 Monolith.UI.Hints = {};
 
 Monolith.UI.Hint = function(name, message, delay) {
+
+	if(window.getQueryParam("noHints") == "true") return;
 	
 	Monolith.UI.Hints[name] = setTimeout(function() {
 
@@ -31,6 +33,8 @@ Monolith.UI.ClearHint = function(name) {
 // TODO: looks like maybe if there's two messages displayed, only one can be dismissed
 Monolith.UI.Message = function(message) {
 	
+	if(window.getQueryParam("noHints") == "true") return;
+	
 	jQuery("#message-overlay div")
 		.append('<span class="ui-message">' + 
 			'<span class="message">' + message + '</span> ' + 
@@ -56,6 +60,8 @@ Monolith.UI.Message = function(message) {
 }
 
 Monolith.UI.TitleMessage = function(message) {
+	
+	if(window.getQueryParam("noHints") == "true") return;
 	
 	jQuery("#message-overlay div")
 		.append('<span class="title">' + message + '</span>');
