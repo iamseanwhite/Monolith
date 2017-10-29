@@ -17,6 +17,8 @@ jQuery("body").on("mouseup", function(e) { if(e.button == 0) mouseDown = Number.
 // TODO: Currently based on mouse X. Has a bad feel. Would prefer to translate mouse delta to transform delta
 jQuery("body").on("mousemove", function(e) {
 	
+	if(window.getQueryParam("noCamera") == "true") return;
+	
 	if(lastMouseX == null) lastMouseX = e.pageX;
 	var deltaX = e.pageX - lastMouseX;
 	
