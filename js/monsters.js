@@ -27,6 +27,8 @@ Monolith.Monsters.SpawnMonster = function() {
 	newEnemy.innerHTML = '<i class="fa ' + Monolith.Monsters.Icon + '"></i>';
 	document.body.appendChild(newEnemy);
 	
+	// THIS IS THE PART THAT IS NOT RIGHT
+	// targetLeftPercent works out bigger than targetTopPercent and why are we doing that anyway
 	jQuery(newEnemy).css("left", "0%").css("top", "0%");
 	if(targetLeftPercent > targetTopPercent) jQuery(newEnemy).css("left", targetLeftPercent - targetTopPercent + "%");
 	else jQuery(newEnemy).css("top", targetTopPercent - targetLeftPercent + "%");

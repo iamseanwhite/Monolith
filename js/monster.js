@@ -11,21 +11,21 @@ Monolith.MonsterLoop = function() {
 
 setInterval(Monolith.MonsterLoop, 500);
 
+Monolith.Monsters.nextLane = -1;
+
 // spawns ...
 
 // TODO: namespace
 Monolith.Monster = function() {
-
-    this.nextLane = -1;
 
     this.findNextOpenLane = function() {
 
         // var laneCount = Monolith.MaxCols * Monolith.MaxRows;
         var laneCount = Monolith.MaxRows;   // later, x2 for the other side, and then we figure out the other sides ...
 
-        if (this.nextLane++ >= laneCount) this.nextLane = 0;
+        if (Monolith.Monsters.nextLane++ >= laneCount) Monolith.Monsters.nextLane = 0;
 
-        return this.nextLane;
+        return Monolith.Monsters.nextLane;
     }
 
     this.initialDraw = function(monster) {
@@ -33,8 +33,18 @@ Monolith.Monster = function() {
         var newEnemy = document.createElement("div");
         newEnemy.className = "enemy";
         newEnemy.innerHTML = '<i class="fa ' + Monolith.Monsters.Icon + '"></i>';
+        newEnemy.style.left = "100%";
+        monster.domElement = newEnemy;
+        
+        // TODO if this keeps, recalculate on resize
+        var position = jQuery(jQuery("#monolith .row")[monster.lane]).children().last().offset()
+        var outerWidth = jQuery(jQuery("#monolith .row")[monster.lane]).children().last().outerWidth()
+        monster.columnRight = Math.floor(position.left + outerWidth);
+        monster.parentOuterWidth = jQuery(jQuery("#monolith .row")[monster.lane]).outerWidth();
+        console.log(monster.columnRight)
 
-        jQuery("#monolith .row")[monster.lane].appendChild(newEnemy);
+        // insert after first child so that the "first" and "last" css selectors can still style correctly ...
+        jQuery(jQuery("#monolith .row")[monster.lane]).children(":first-child").after(newEnemy);
     }
 
     var monster = {
@@ -47,7 +57,8 @@ Monolith.Monster = function() {
         lanePosition: 0, 
         maxLanePosition: 5,  // we'll want to make this better at some point ...
         lastMovement: new Date().getTime(),
-        movementInterval: 1500
+        // movementInterval: 1150 
+        movementInterval: 150 
     };
 
     monster.move = function() {
@@ -56,7 +67,16 @@ Monolith.Monster = function() {
 
         if(this.lanePosition < this.maxLanePosition) this.lanePosition++;
 
+        this.crappyPixelBasedMovement();
+
         this.lastMovement = new Date().getTime();
+    }
+
+    monster.crappyPixelBasedMovement = function() {
+
+        var monsterLeft = this.parentOuterWidth * (parseInt(this.domElement.style.left) / 100);
+        if(monsterLeft > this.columnRight)
+            this.domElement.style.left = (parseInt(this.domElement.style.left) - 1) + "%";
     }
 
     monster.attack = function() {
@@ -91,6 +111,7 @@ Monolith.Monster = function() {
     monster.draw = function() {
 
         // render, or fix the rendering of the monster
+        // TODO: use "needsRenderUpdate" flag ...
     }
 
     monster.think = function() {
