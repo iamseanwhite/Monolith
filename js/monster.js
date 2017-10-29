@@ -40,6 +40,7 @@ Monolith.Monster = function() {
         var position = jQuery(jQuery("#monolith .row")[monster.lane]).children().last().offset()
         var outerWidth = jQuery(jQuery("#monolith .row")[monster.lane]).children().last().outerWidth()
         monster.columnRight = Math.floor(position.left + outerWidth);
+
         monster.parentOuterWidth = jQuery(jQuery("#monolith .row")[monster.lane]).outerWidth();
         console.log(monster.columnRight)
 
@@ -57,8 +58,7 @@ Monolith.Monster = function() {
         lanePosition: 0, 
         maxLanePosition: 5,  // we'll want to make this better at some point ...
         lastMovement: new Date().getTime(),
-        // movementInterval: 1150 
-        movementInterval: 150 
+        movementInterval: 1150 
     };
 
     monster.move = function() {
@@ -74,7 +74,8 @@ Monolith.Monster = function() {
 
     monster.crappyPixelBasedMovement = function() {
 
-        var monsterLeft = this.parentOuterWidth * (parseInt(this.domElement.style.left) / 100);
+        // var monsterLeft = this.parentOuterWidth * (parseInt(this.domElement.style.left) / 100);
+        var monsterLeft = parseInt(jQuery(this.domElement).offset().left);
         if(monsterLeft > this.columnRight)
             this.domElement.style.left = (parseInt(this.domElement.style.left) - 1) + "%";
     }
@@ -123,6 +124,7 @@ Monolith.Monster = function() {
         this.draw();
     }
 
+    // TODO: refactor to use "this"? ...
     Monolith.LivingMonsters.push(monster);
 
     this.initialDraw(monster);

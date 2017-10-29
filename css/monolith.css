@@ -167,9 +167,3 @@ body {
 #monolith .fa {
 	font-size: .75em;
 }
-
-.enemy {
-	position: absolute;
-    color: red;
-    opacity: .65;
-}
