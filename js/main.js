@@ -21,7 +21,7 @@ function randomBetween(first, second) {
 
 window.queryParams = {};
 var qps = window.location.href.split("?")[1];
-if(qps.length > 0) {
+if(qps && qps.length > 0) {
     qps = qps.split("&");
     for(var index in qps) {
         var keyVal = qps[index].split("=");
