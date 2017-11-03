@@ -69,7 +69,7 @@ Monolith.UI.TitleMessage = function(message) {
 	
 	jQuery("#message-overlay div")
 		.show()
-		.append('<span class="title">' + message + '</span>');
+		.append('<h1 class="title">' + message + '</h1>');
 		
 	setTimeout(function() {
 		jQuery("#message-overlay h1").css("opacity", ".9");

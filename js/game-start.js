@@ -3,7 +3,7 @@ jQuery(window).trigger('resize');
 // TODO: Do this for all variables that init with non-zero value?
 Monolith.UI.SetUIVariable('materials');
 
-Monolith.UI.TitleMessage('<h1>Monolith</h1>');
+Monolith.UI.TitleMessage('Monolith');
 
 /*
 Monolith.UI.Hint("Habitat", 
