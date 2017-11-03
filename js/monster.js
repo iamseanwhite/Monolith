@@ -3,6 +3,8 @@ Monolith.LivingMonsters = [];
 
 Monolith.MonsterLoop = function() {
 
+    Monolith.Monsters.CalculateMonsterSpawns();
+
     for(var index in Monolith.LivingMonsters) {
 
         Monolith.LivingMonsters[index].think();
@@ -12,11 +14,22 @@ Monolith.MonsterLoop = function() {
 setInterval(Monolith.MonsterLoop, 500);
 
 Monolith.Monsters.nextLane = -1;
+Monolith.Monsters.SpawnDelay = 25000;
+Monolith.Monsters.LastSpawn = new Date().getTime();
 
-// spawns ...
+// Spawn based on the number of population, last spawn time
+Monolith.Monsters.CalculateMonsterSpawns = function() {
 
-// TODO: namespace
+    if(Monolith.Resources.Get("population") < 50) return;
+    
+    if(new Date().getTime() - Monolith.Monsters.LastSpawn < Monolith.Monsters.SpawnDelay) return;
+	
+	Monolith.Monster();
+}
+
 Monolith.Monster = function() {
+
+    Monolith.Monsters.LastSpawn = new Date().getTime();
 
     this.findNextOpenLane = function() {
 
@@ -58,7 +71,7 @@ Monolith.Monster = function() {
         lanePosition: 0, 
         maxLanePosition: 5,  // we'll want to make this better at some point ...
         lastMovement: new Date().getTime(),
-        movementInterval: 1150 
+        movementInterval: 750 
     };
 
     monster.move = function() {
