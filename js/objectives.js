@@ -33,10 +33,10 @@ Monolith.Objective.AddStructureBasedObjective = function(structure, quantity, me
     Monolith.Objective.Add(
         message,
         function() { 
-            return Monolith.GetStructureCount(structure) + ' / ' + quantity + 
+            return Monolith.Resources.GetStructureCount(structure) + ' / ' + quantity + 
             ' <i class=\"fa ' + structure["ui-class"] + '\"/>';
         },
-        function() { return Monolith.GetStructureCount(structure) >= quantity; },
+        function() { return Monolith.Resources.GetStructureCount(structure) >= quantity; },
         successFunc
     );
 }

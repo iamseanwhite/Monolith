@@ -1,3 +1,5 @@
+// TODO: should this file be renamed to 'resources'?
+
 Monolith.Resources = {
 	"population" : { "Icon" : "fa-users"},
 	"materials" : { "Icon" : "fa-cubes"},
@@ -14,8 +16,8 @@ Monolith.Player.Resources = {
 	"population": {
 		"Icon": "fa-users",
 		"max": function() { 
-			return (Monolith.GetStructureCount("Habitat") * Monolith.Resources.MaxPopPerHabitat) +
-			(Monolith.GetStructureCount("Bunk Beds") * Monolith.Resources.MaxPopPerHabitat); }
+			return (Monolith.Resources.GetStructureCount("Habitat") * Monolith.Resources.MaxPopPerHabitat) +
+			(Monolith.Resources.GetStructureCount("Bunk Beds") * Monolith.Resources.MaxPopPerHabitat); }
 	},
 	"materials": {
 		"Icon": "fa-cubes",
@@ -66,14 +68,14 @@ Monolith.CalculateMaterials = function() {
 
 	// calculate bank interest AFTER adding material from population
 	Monolith.Resources.Add("materials",
-		(Monolith.GetStructureCount("Bank") * Monolith.Resources.Get("materials") * Monolith.Resources.BankInterest)
+		(Monolith.Resources.GetStructureCount("Bank") * Monolith.Resources.Get("materials") * Monolith.Resources.BankInterest)
 	);
 }
 
 var promptedYet = false;	// We can change "promptedYet" to a "lastPromptTime" variable with an initial value like null
 Monolith.CalculateResearch = function() {
 	
-	Monolith.Resources.Add("research", Monolith.GetStructureCount("Lab"));
+	Monolith.Resources.Add("research", Monolith.Resources.GetStructureCount("Lab"));
 	
 	/*
 	// TODO: And there's things that can be researched ... 
@@ -89,7 +91,7 @@ Monolith.CalculateResearch = function() {
 Monolith.CalculateKills = function() {
 	
 	// TODO: This is not at all how this should be calculated
-	var turretKills = Monolith.GetStructureCount("Turret");
+	var turretKills = Monolith.Resources.GetStructureCount("Turret");
 	Monolith.Resources.Add("kills", turretKills);
 }
 
@@ -122,6 +124,13 @@ Monolith.RecalculateCost = function(structure) {
 	}
 
 	Monolith.RepaintMenuItem(structure);
+}
+
+Monolith.Resources.GetStructureCount = function(structure) {
+
+	if(typeof structure != "string") structure = structure.name;
+	
+	return Monolith.StructureCount[structure] || 0;
 }
 
 setInterval(Monolith.CalculatePopulation, 5000);

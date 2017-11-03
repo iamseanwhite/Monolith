@@ -9,6 +9,9 @@ Previous floor above at 50% opacity
 
 next floor below at 50% opacity
 
+Perhaps we could have buildings that increase human ferry rate into monolith (helipad?)
+	- This could be the start of stuff that could get tacked on the side(s)
+
 maybe separate out description from menu
 
 Achievements:

@@ -1,61 +1,151 @@
 Monolith.Monsters = {};
 
-// Randomly spawn monsters and have them move through the background (Aesthetic only)
+// later, randomly spawn monsters and have them move through the background (Aesthetic only)
+
+Monolith.LivingMonsters = [];
+
+Monolith.MonsterLoop = function() {
+
+    Monolith.Monsters.CalculateMonsterSpawns();
+
+    for(var index in Monolith.LivingMonsters) {
+
+        Monolith.LivingMonsters[index].think();
+    }
+}
+
+setInterval(Monolith.MonsterLoop, 250);
 
 Monolith.Monsters.Icon = "flaticon-skull";
-Monolith.Monsters.MovementRate = 1;
-Monolith.Monsters.Active = [];
+Monolith.Monsters.nextLane = -1;
+Monolith.Monsters.SpawnDelay = 25000;
+Monolith.Monsters.LastSpawn = new Date().getTime();
 
+// Spawn based on the number of population, last spawn time
 Monolith.Monsters.CalculateMonsterSpawns = function() {
+
+    if(Monolith.Resources.Get("population") < 50) return;
+    
+    if(new Date().getTime() - Monolith.Monsters.LastSpawn < Monolith.Monsters.SpawnDelay) return;
 	
-	if(Monolith.Resources.Get("population") > 11) Monolith.Monsters.SpawnMonster();
+	Monolith.Monster();
 }
 
-Monolith.Monsters.SpawnMonster = function() {
-	
-	// Pick a 'lane' on the tower to 'run at'
-	var target = jQuery("#monolith .row .col")[3];
-	// var targetLeftPercent = (jQuery(target).offset().left + (jQuery(target).outerWidth() / 2)) / jQuery(window).outerWidth();
-	// var targetTopPercent = (jQuery(target).offset().top + (jQuery(target).outerHeight() / 3)) / jQuery(window).outerHeight();
-	var targetLeftPercent = (jQuery(target).offset().left / jQuery(window).outerWidth()) * 100;
-	var targetTopPercent = (jQuery(target).offset().top / jQuery(window).outerHeight()) * 100;
-	// targetLeftPercent = targetLeftPercent * 100;
-	// targetTopPercent = targetTopPercent * 100;
-	
-	var newEnemy = document.createElement("div");
-	newEnemy.className = "enemy";
-	newEnemy.innerHTML = '<i class="fa ' + Monolith.Monsters.Icon + '"></i>';
-	document.body.appendChild(newEnemy);
-	
-	// THIS IS THE PART THAT IS NOT RIGHT
-	// targetLeftPercent works out bigger than targetTopPercent and why are we doing that anyway
-	jQuery(newEnemy).css("left", "0%").css("top", "0%");
-	if(targetLeftPercent > targetTopPercent) jQuery(newEnemy).css("left", targetLeftPercent - targetTopPercent + "%");
-	else jQuery(newEnemy).css("top", targetTopPercent - targetLeftPercent + "%");
-	
-	Monolith.Monsters.Active.push({
-		"element" : newEnemy,
-		"targetLeftPercent" : targetLeftPercent,
-		"targetTopPercent" : targetTopPercent,
-	});
-	
-	if(!Monolith.Monsters.ActInterval) Monolith.Monsters.ActInterval = setInterval(Monolith.Monsters.Act, 80);
-}
+Monolith.Monster = function() {
 
-Monolith.Monsters.Act = function() {
-	
-	for(var monsterIndex in Monolith.Monsters.Active) {
-		
-		var monster = Monolith.Monsters.Active[monsterIndex];
-		
-		var monsterLeft = parseInt(monster.element.style.left);
-		var monsterTop = parseInt(monster.element.style.top);
-		
-		if(monsterLeft < monster.targetLeftPercent) monster.element.style.left = (monsterLeft + Monolith.Monsters.MovementRate) + "%";
-		if(monsterTop < monster.targetTopPercent) monster.element.style.top = (monsterTop + Monolith.Monsters.MovementRate) + "%";
-		
-		// if in range, attack
-	}
-}
+    Monolith.Monsters.LastSpawn = new Date().getTime();
 
-// setInterval(Monolith.Monsters.CalculateMonsterSpawns, 7200);
+    this.findNextOpenLane = function() {
+
+        // var laneCount = Monolith.MaxCols * Monolith.MaxRows;
+        var laneCount = Monolith.MaxRows;   // later, x2 for the other side, and then we figure out the other sides ...
+
+        if (Monolith.Monsters.nextLane++ >= laneCount) Monolith.Monsters.nextLane = 0;
+
+        return Monolith.Monsters.nextLane;
+    }
+
+    this.initialDraw = function() {
+
+        var newEnemy = document.createElement("div");
+        newEnemy.className = "enemy";
+        newEnemy.innerHTML = '<i class="fa ' + Monolith.Monsters.Icon + '"></i>';
+        newEnemy.style.left = "100%";
+        this.domElement = newEnemy;
+        
+        // TODO if this keeps, recalculate on resize
+        var position = jQuery(jQuery("#monolith .row")[this.lane]).children().last().offset()
+        var outerWidth = jQuery(jQuery("#monolith .row")[this.lane]).children().last().outerWidth()
+        this.columnRight = Math.floor(position.left + outerWidth);
+
+        this.parentOuterWidth = jQuery(jQuery("#monolith .row")[this.lane]).outerWidth();
+        console.log(this.columnRight)
+
+        // insert after first child so that the "first" and "last" css selectors can still style correctly ...
+        jQuery(jQuery("#monolith .row")[this.lane]).children(":first-child").after(newEnemy);
+    }
+
+    this.x = 0;
+    this.y = 0;
+    this.health = 100;
+    this.damageDone = 1;
+
+    this.lane = this.findNextOpenLane();
+    this.lanePosition = 0; 
+    this.maxLanePosition = 5;  // we'll want to make this better at some point ...
+    this.lastMovement = new Date().getTime();
+    this.movementInterval = 600;
+
+    this.move = function() {
+
+        if(new Date().getTime() - this.lastMovement < this.movementInterval) return;
+
+        if(this.lanePosition < this.maxLanePosition) this.lanePosition++;
+
+        this.crappyPixelBasedMovement();
+
+        this.lastMovement = new Date().getTime();
+    }
+
+    this.crappyPixelBasedMovement = function() {
+
+        // var monsterLeft = this.parentOuterWidth * (parseInt(this.domElement.style.left) / 100);
+        var monsterLeft = parseInt(jQuery(this.domElement).offset().left);
+        if(monsterLeft > this.columnRight)
+            this.domElement.style.left = (parseInt(this.domElement.style.left) - 1) + "%";
+    }
+
+    this.attack = function() {
+
+        // later we can pick a specific tile to damage ...
+
+        // TODO: attack delay
+
+        Monolith.damage(this.damageDone);
+    }
+
+    this.damage = function(amount) {
+
+        this.health -= amount;
+
+        if(this.health < 1) {
+
+            this.kill();
+        }
+    }
+
+    this.kill = function() {
+
+        for(var i = 0; i < Monolith.LivingMonsters.length; i++) {
+
+            if(Monolith.LivingMonsters[i] == this) {
+
+                Monolith.LivingMonsters.splice(i, 1);
+                break;
+            }
+        }
+
+        jQuery(this.domElement).remove();
+    }
+
+    this.draw = function() {
+
+        // render, or fix the rendering of the monster
+        // TODO: use "needsRenderUpdate" flag ...
+    }
+
+    this.think = function() {
+
+        this.move();
+
+        this.attack();
+
+        this.draw();
+    }
+
+    Monolith.LivingMonsters.push(this);
+
+    this.initialDraw();
+
+    return this;
+}
