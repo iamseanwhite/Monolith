@@ -17,12 +17,11 @@ Monolith.TurretLoop = function() {
         for(var index in Monolith.LivingMonsters) {
     
             new Monolith.Bullet(this, Monolith.LivingMonsters[index]);
-            // Monolith.LivingMonsters[index].think();
         }
     });
 }
     
-// setInterval(Monolith.TurretLoop, 250);
+setInterval(Monolith.TurretLoop, 2500);
 
 Monolith.BulletLoop = function() {
 
@@ -42,9 +41,6 @@ Monolith.Bullet = function(spawnElement, target) {
         console.log("Didn't properly 'new' bullet!");
         return;
     }
-
-    console.log(spawnElement);
-    console.log(target);
 
     this.target = target;
     this.movementAmount = 25;
