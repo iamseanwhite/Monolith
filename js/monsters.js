@@ -28,22 +28,36 @@ Monolith.Monsters.CalculateMonsterSpawns = function() {
     
     if(new Date().getTime() - Monolith.Monsters.LastSpawn < Monolith.Monsters.SpawnDelay) return;
 	
-	Monolith.Monster();
+	new Monolith.Monster();
+}
+
+Monolith.Monsters.FindNextOpenLane = function() {
+
+    // var laneCount = Monolith.MaxCols * Monolith.MaxRows;
+    var laneCount = Monolith.MaxRows;   // later, x2 for the other side, and then we figure out the other sides ...
+
+    if (Monolith.Monsters.nextLane++ >= laneCount) Monolith.Monsters.nextLane = 0;
+
+    return Monolith.Monsters.nextLane;
 }
 
 Monolith.Monster = function() {
 
+    // they didn't call "new"
+    if(this == Monolith) return;
+
     Monolith.Monsters.LastSpawn = new Date().getTime();
+    
+    this.x = 0;
+    this.y = 0;
+    this.health = 100;
+    this.damageDone = 1;
 
-    this.findNextOpenLane = function() {
-
-        // var laneCount = Monolith.MaxCols * Monolith.MaxRows;
-        var laneCount = Monolith.MaxRows;   // later, x2 for the other side, and then we figure out the other sides ...
-
-        if (Monolith.Monsters.nextLane++ >= laneCount) Monolith.Monsters.nextLane = 0;
-
-        return Monolith.Monsters.nextLane;
-    }
+    this.lane = Monolith.Monsters.FindNextOpenLane();
+    this.lanePosition = 0; 
+    this.maxLanePosition = 5;  // we'll want to make this better at some point ...
+    this.lastMovement = new Date().getTime();
+    this.movementInterval = 600;
 
     this.initialDraw = function() {
 
@@ -64,17 +78,6 @@ Monolith.Monster = function() {
         // insert after first child so that the "first" and "last" css selectors can still style correctly ...
         jQuery(jQuery("#monolith .row")[this.lane]).children(":first-child").after(newEnemy);
     }
-
-    this.x = 0;
-    this.y = 0;
-    this.health = 100;
-    this.damageDone = 1;
-
-    this.lane = this.findNextOpenLane();
-    this.lanePosition = 0; 
-    this.maxLanePosition = 5;  // we'll want to make this better at some point ...
-    this.lastMovement = new Date().getTime();
-    this.movementInterval = 600;
 
     this.move = function() {
 

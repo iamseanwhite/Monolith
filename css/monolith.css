@@ -167,3 +167,10 @@ body {
 #monolith .fa {
 	font-size: .75em;
 }
+
+.bullet {
+    background-color: black;
+    width: .5em;
+    height: .5em;
+    position: absolute;
+}
