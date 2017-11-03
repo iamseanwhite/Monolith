@@ -53,10 +53,12 @@ Monolith.UI.Message = function(message) {
 	message.children(".close").click(function(event) {
 		
 		var messageParent = this.parentNode;
-		jQuery(messageParent).css("opacity", "0");
+		jQuery(messageParent).css("opacity", "0");	// maybe we could do jQuery(...).fadeOut().remove()...
 
 		setTimeout(function() {
 			messageParent.remove();
+
+			if(jQuery("#message-overlay div").children().size() == 0) jQuery("#message-overlay div").hide();
 		}, 2000);
 	});
 }
