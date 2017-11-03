@@ -8,6 +8,7 @@ Monolith.UI.Hint = function(name, message, delay) {
 	Monolith.UI.Hints[name] = setTimeout(function() {
 
 		jQuery("#message-overlay div")
+			.show()
 			.append('<span class="hint">' + message + '</span>');
 			
 		setTimeout(function() {
@@ -36,6 +37,7 @@ Monolith.UI.Message = function(message) {
 	if(window.getQueryParam("noHints") == "true") return;
 	
 	jQuery("#message-overlay div")
+		.show()
 		.append('<span class="ui-message">' + 
 			'<span class="message">' + message + '</span> ' + 
 			' <span class="close">x</span>' + 
@@ -64,6 +66,7 @@ Monolith.UI.TitleMessage = function(message) {
 	if(window.getQueryParam("noHints") == "true") return;
 	
 	jQuery("#message-overlay div")
+		.show()
 		.append('<span class="title">' + message + '</span>');
 		
 	setTimeout(function() {
@@ -81,7 +84,9 @@ Monolith.UI.FadeMessageOut = function(time, messageClass) {
 		
 	setTimeout(function() {
 		jQuery("#message-overlay " + messageClass).remove();
-		}, time + 2000);	
+
+		if(jQuery("#message-overlay div").children().size() == 0) jQuery("#message-overlay div").hide();
+		}, time + 2000);
 }
 
 Monolith.UI.HighlightElement = function(element) {
@@ -131,3 +136,7 @@ Monolith.UI.HighlightMenuItem = function(menuItem) {
 		jQuery(menuItem).toggleClass("highlightUIItem");
 	}, 4200);
 }
+
+// TODO: ideally get to a point where the message overlay doesn't wind up blocking other ui elements
+// maybe those ui elements have higher z-index priority?
+jQuery("#message-overlay div").hide();
