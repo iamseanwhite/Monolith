@@ -11,7 +11,7 @@ Monolith.MonsterLoop = function() {
     }
 }
 
-setInterval(Monolith.MonsterLoop, 500);
+setInterval(Monolith.MonsterLoop, 250);
 
 Monolith.Monsters.nextLane = -1;
 Monolith.Monsters.SpawnDelay = 25000;
@@ -41,40 +41,38 @@ Monolith.Monster = function() {
         return Monolith.Monsters.nextLane;
     }
 
-    this.initialDraw = function(monster) {
+    this.initialDraw = function() {
 
         var newEnemy = document.createElement("div");
         newEnemy.className = "enemy";
         newEnemy.innerHTML = '<i class="fa ' + Monolith.Monsters.Icon + '"></i>';
         newEnemy.style.left = "100%";
-        monster.domElement = newEnemy;
+        this.domElement = newEnemy;
         
         // TODO if this keeps, recalculate on resize
-        var position = jQuery(jQuery("#monolith .row")[monster.lane]).children().last().offset()
-        var outerWidth = jQuery(jQuery("#monolith .row")[monster.lane]).children().last().outerWidth()
-        monster.columnRight = Math.floor(position.left + outerWidth);
+        var position = jQuery(jQuery("#monolith .row")[this.lane]).children().last().offset()
+        var outerWidth = jQuery(jQuery("#monolith .row")[this.lane]).children().last().outerWidth()
+        this.columnRight = Math.floor(position.left + outerWidth);
 
-        monster.parentOuterWidth = jQuery(jQuery("#monolith .row")[monster.lane]).outerWidth();
-        console.log(monster.columnRight)
+        this.parentOuterWidth = jQuery(jQuery("#monolith .row")[this.lane]).outerWidth();
+        console.log(this.columnRight)
 
         // insert after first child so that the "first" and "last" css selectors can still style correctly ...
-        jQuery(jQuery("#monolith .row")[monster.lane]).children(":first-child").after(newEnemy);
+        jQuery(jQuery("#monolith .row")[this.lane]).children(":first-child").after(newEnemy);
     }
 
-    var monster = {
-        x: 0,
-        y: 0,
-        health: 100,
-        damageDone: 1,
+    this.x = 0;
+    this.y = 0;
+    this.health = 100;
+    this.damageDone = 1;
 
-        lane: this.findNextOpenLane(),
-        lanePosition: 0, 
-        maxLanePosition: 5,  // we'll want to make this better at some point ...
-        lastMovement: new Date().getTime(),
-        movementInterval: 750 
-    };
+    this.lane = this.findNextOpenLane();
+    this.lanePosition = 0; 
+    this.maxLanePosition = 5;  // we'll want to make this better at some point ...
+    this.lastMovement = new Date().getTime();
+    this.movementInterval = 600;
 
-    monster.move = function() {
+    this.move = function() {
 
         if(new Date().getTime() - this.lastMovement < this.movementInterval) return;
 
@@ -85,7 +83,7 @@ Monolith.Monster = function() {
         this.lastMovement = new Date().getTime();
     }
 
-    monster.crappyPixelBasedMovement = function() {
+    this.crappyPixelBasedMovement = function() {
 
         // var monsterLeft = this.parentOuterWidth * (parseInt(this.domElement.style.left) / 100);
         var monsterLeft = parseInt(jQuery(this.domElement).offset().left);
@@ -93,14 +91,14 @@ Monolith.Monster = function() {
             this.domElement.style.left = (parseInt(this.domElement.style.left) - 1) + "%";
     }
 
-    monster.attack = function() {
+    this.attack = function() {
 
         // later we can pick a specific tile to damage ...
 
         Monolith.damage(this.damageDone);
     }
 
-    monster.damage = function(amount) {
+    this.damage = function(amount) {
 
         this.health -= amount;
 
@@ -110,7 +108,7 @@ Monolith.Monster = function() {
         }
     }
 
-    monster.kill = function() {
+    this.kill = function() {
 
         for(var i = 0; i < Monolith.LivingMonsters.length; i++) {
 
@@ -120,15 +118,17 @@ Monolith.Monster = function() {
                 break;
             }
         }
+
+        jQuery(this.domElement).remove();
     }
 
-    monster.draw = function() {
+    this.draw = function() {
 
         // render, or fix the rendering of the monster
         // TODO: use "needsRenderUpdate" flag ...
     }
 
-    monster.think = function() {
+    this.think = function() {
 
         this.move();
 
@@ -137,10 +137,9 @@ Monolith.Monster = function() {
         this.draw();
     }
 
-    // TODO: refactor to use "this"? ...
-    Monolith.LivingMonsters.push(monster);
+    Monolith.LivingMonsters.push(this);
 
-    this.initialDraw(monster);
+    this.initialDraw();
 
-    return monster;
+    return this;
 }
