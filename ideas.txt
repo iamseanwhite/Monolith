@@ -28,27 +28,23 @@ When rendering "3D": http://www.noeltock.com/tilt-shift-css3-jquery-plugin/
 
 Minification: http://stackoverflow.com/questions/9287823/combine-and-minify-multiple-css-js-files
 
-Change game modes using get parameters: http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
+Change game modes using get parameters
 
 Upgrades should go back to being stored more simply in floor tiles
 
-Maybe population should increase faster with more (either more pop or more habitats)
+Maybe population should increase faster the more you have (either more pop or more habitats / distance between pop and capacity)
 
 Background images changes as tower gets higher ... you can reach cloud level then space level where aliens are like wtfmate pew pew.
 
 Menu always visible
-Visual up arrow somewhere (next to stairs?)
-Platform bigger
 
 Blinking icon on the screen indicating current "need"
 	Beds, then stairs, then monsters
 
 Start with one turret
-Visual cue for attention is required at base
+Have a visual cue for when player attention is required at the base of the tower
 
 Display Number the floors
 
-Method to compute cost of a thing
-All things go up in cost with each purchase
-
-Higher population = higher population growth rate
+players can color their monoliths... interior, exterior, furniture. even itemized or classified furniture
+	(all items dealing with "population" are blue, all turrets red, etc.)

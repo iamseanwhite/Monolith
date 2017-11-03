@@ -95,6 +95,8 @@ Monolith.Monster = function() {
 
         // later we can pick a specific tile to damage ...
 
+        // TODO: attack delay
+
         Monolith.damage(this.damageDone);
     }
 
