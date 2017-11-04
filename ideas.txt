@@ -14,6 +14,8 @@ Perhaps we could have buildings that increase human ferry rate into monolith (he
 
 maybe separate out description from menu
 
+Clicking on turret should show attack radius 
+
 Achievements:
 	Shooty McShootFace : have a turret with 100+ kills
 	Slaughter: Have over 1000 total kills
@@ -48,6 +50,8 @@ Start with one turret
 Have a visual cue for when player attention is required at the base of the tower
 
 Display Number the floors
+
+Mouseover objective shows text (as title for now)
 
 players can color their monoliths... interior, exterior, furniture. even itemized or classified furniture
 	(all items dealing with "population" are blue, all turrets red, etc.)
