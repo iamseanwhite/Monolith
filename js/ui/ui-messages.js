@@ -43,14 +43,14 @@ Monolith.UI.Message = function(message) {
 			' <span class="close">x</span>' + 
 			'</span>');
 
-		var message = jQuery(".ui-message").last();
+	var messageDom = jQuery(".ui-message").last();
 		
 	setTimeout(function() {
-		message.css("opacity", ".9");
+		messageDom.css("opacity", ".9");
 	}, 20);
 
 	// TODO: Fade out faster than it faded in ...
-	message.children(".close").click(function(event) {
+	messageDom.children(".close").click(function(event) {
 		
 		var messageParent = this.parentNode;
 		jQuery(messageParent).css("opacity", "0");	// maybe we could do jQuery(...).fadeOut().remove()...

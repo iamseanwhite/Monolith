@@ -26,7 +26,7 @@ Monolith.Objective.Add = function(message, displayFunc, criteriaFunc, completeFu
 
 Monolith.Objective.AddStructureBasedObjective = function(structure, quantity, message, successFunc) {
 
-    message = message.replace('<i {structure} />', '<i class="fa ' + structure["ui-class"] + '"');
+    message = message.replace('<i {structure} />', '<i class="fa ' + structure["ui-class"] + '" />');
     // TODO: assign the message to a variable that can be cleared when the objective is completed
     Monolith.UI.Message(message);
     
@@ -43,7 +43,7 @@ Monolith.Objective.AddStructureBasedObjective = function(structure, quantity, me
 
 Monolith.Objective.AddResourceBasedObjective = function(resource, quantity, message, successFunc) {
 
-    message = message.replace('<i {resource} />', '<i class="fa ' + resource["ui-class"] + '"');
+    message = message.replace('<i {resource} />', '<i class="fa ' + resource["ui-class"] + '" />');
     Monolith.UI.Message(message);
 
     Monolith.Objective.Add(
