@@ -4,12 +4,14 @@ Monolith.UI.Hints = {};
 Monolith.UI.Hint = function(name, message, delay) {
 
 	if(window.getQueryParam("noHints") == "true") return;
+
+	if(!message) message = name;
 	
 	Monolith.UI.Hints[name] = setTimeout(function() {
 
 		jQuery("#message-overlay div")
 			.show()
-			.append('<span class="hint">' + message + '</span>');
+			.append('<span class="ui-message hint">' + message + '</span>');
 			
 		setTimeout(function() {
 			jQuery("#message-overlay .hint")
@@ -17,7 +19,7 @@ Monolith.UI.Hint = function(name, message, delay) {
 			}, 20);
 			
 		Monolith.UI.FadeMessageOut(4200, ".hint");
-	}, delay);
+	}, delay || 0);
 }
 
 Monolith.UI.ClearHint = function(name) {
