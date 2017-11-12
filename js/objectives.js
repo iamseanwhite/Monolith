@@ -1,4 +1,3 @@
-
 Monolith.Objective = {};
 Monolith.Objectives = [];
 
@@ -63,11 +62,11 @@ function addStairsObjective() {
         Monolith.AllBuildables.Stairs,
         1,
         'You need room to grow. Build <i {structure} /> to expand your Monolith.',
-        function() { console.log("They built stairs. We need to add more objectives. "); }
+        function() { /* no success function for now ... */ }
     )
 }
 
-var addTurretObjective = function() {
+Monolith.Objective.AddTurretObjective = function() {
     
     Monolith.Objective.AddStructureBasedObjective(
         Monolith.AllBuildables.Turret,

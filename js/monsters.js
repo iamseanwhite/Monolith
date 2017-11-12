@@ -36,15 +36,22 @@ Monolith.Monsters.FindNextOpenLane = function() {
     // var laneCount = Monolith.MaxCols * Monolith.MaxRows;
     var laneCount = Monolith.MaxRows;   // later, x2 for the other side, and then we figure out the other sides ...
 
-    if (Monolith.Monsters.nextLane++ >= laneCount) Monolith.Monsters.nextLane = 0;
+    Monolith.Monsters.nextLane++;
+
+    if (Monolith.Monsters.nextLane >= laneCount) Monolith.Monsters.nextLane = 0;
 
     return Monolith.Monsters.nextLane;
 }
+
+var hasSpawnedMonster = false;
 
 Monolith.Monster = function() {
 
     // they didn't call "new"
     if(this == Monolith) return;
+
+    if(!hasSpawnedMonster) Monolith.Objective.AddTurretObjective();
+    hasSpawnedMonster = true;
 
     Monolith.Monsters.LastSpawn = new Date().getTime();
     
@@ -67,7 +74,7 @@ Monolith.Monster = function() {
         newEnemy.style.left = "100%";
         this.domElement = newEnemy;
         
-        // TODO if this keeps, recalculate on resize
+        // TODO if this code doesn't wind up getting replaced, recalculate on resize
         var position = jQuery(jQuery("#monolith .row")[this.lane]).children().last().offset()
         var outerWidth = jQuery(jQuery("#monolith .row")[this.lane]).children().last().outerWidth()
         this.columnRight = Math.floor(position.left + outerWidth);

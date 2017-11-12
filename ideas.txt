@@ -1,5 +1,4 @@
-Current item:
-	Turrets shoot and monsters take damage and die
+Should clicking stairs take you to the next floor?
 
 Switch back to popup menu
 	Make it so that tapping anywhere but the menu closes the menu
