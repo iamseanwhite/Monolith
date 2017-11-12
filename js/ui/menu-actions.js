@@ -167,6 +167,8 @@ Monolith.DoResearch = function(buildItem) {
 
 // TODO: maybe this should go into a structures.js and be Monolith.Structures.DoBuild ...
 function doBuild(structure) {
+
+	console.log("hay")
 	
 	if(structure.isStairs && currentFloorHasStairs()) return;
 	
