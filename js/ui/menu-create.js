@@ -51,7 +51,7 @@ Monolith.RepaintMenuItem = function(structure) {
 	
 	var itemClass = structure["ui-class"] + ' ' + structure["name"];
 
-	jQuery(".menu ." + structure["name"]).html('<i class="fa ' + itemClass + '"></i>' +
+	jQuery(".menu ." + structure["name"].replaceAll(" ", ".")).html('<i class="fa ' + itemClass + '"></i>' +
 		'<br />' + menuItemCost);
 
 }
