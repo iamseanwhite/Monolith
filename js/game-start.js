@@ -24,20 +24,7 @@ Monolith.UI.Hint("Lab",
 
 setTimeout(function() {
 
-	var popToSupport = 40;
-	
-	var message = 'You will need a workforce. Build enough <i class="fa ' 
-		+ Monolith.AllBuildables.Habitat["ui-class"] 
-		+ '"/> to support ' + popToSupport + ' <i class="fa ' + Monolith.Resources["population"].Icon + '"/>';
-	Monolith.UI.Message(message);
-
-	// still have to call this here because it's using max, not actual
-	Monolith.Objective.Add(
-		message,
-		function() { return Monolith.Player.Resources.population.max() + ' / ' + popToSupport + ' <i class=\"fa ' + Monolith.Resources["population"].Icon + '\"/>'; },
-		function() { return Monolith.Player.Resources.population.max() >= popToSupport; },
-		addStairsObjective
-	);
+	Monolith.Objectives.addWorkforceObjective();
 }, 5200);
 	
 // TODO: Hint highlight for research menu ...

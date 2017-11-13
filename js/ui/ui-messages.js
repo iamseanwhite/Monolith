@@ -32,8 +32,6 @@ Monolith.UI.ClearHint = function(name) {
 	}
 }
 
-// TODO: multiple Messages are coming side-by-side rather than stacked veritcally
-// TODO: looks like maybe if there's two messages displayed, only one can be dismissed
 Monolith.UI.Message = function(message) {
 	
 	if(window.getQueryParam("noHints") == "true") return;
@@ -49,10 +47,10 @@ Monolith.UI.Message = function(message) {
 		
 	setTimeout(function() {
 		messageDom.css("opacity", ".9");
-	}, 20);
+	}, 10);
 
 	// TODO: Fade out faster than it faded in ...
-	messageDom.children(".close").click(function(event) {
+	messageDom.children(".close").click(function() {
 		
 		var messageParent = this.parentNode;
 		jQuery(messageParent).css("opacity", "0");	// maybe we could do jQuery(...).fadeOut().remove()...
@@ -63,6 +61,8 @@ Monolith.UI.Message = function(message) {
 			if(jQuery("#message-overlay div").children().size() == 0) jQuery("#message-overlay div").hide();
 		}, 2000);
 	});
+
+	return messageDom;
 }
 
 Monolith.UI.TitleMessage = function(message) {

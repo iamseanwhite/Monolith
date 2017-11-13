@@ -1,4 +1,3 @@
-
 Monolith.UI = {};
 Monolith.UI.Objectives = [];
 

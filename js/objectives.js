@@ -1,12 +1,17 @@
 Monolith.Objective = {};
-Monolith.Objectives = [];
+Monolith.Objectives = {};
+Monolith.ObjectiveList = [];
 
-Monolith.Objective.Add = function(message, displayFunc, criteriaFunc, completeFunc) {
+Monolith.Objective.Add = function(objectiveMessage, displayFunc, criteriaFunc, completeFunc) {
     
     Monolith.UI.Objectives.push({
         "displayFunc" : displayFunc,
         "criteriaFunc" : criteriaFunc,
-        "completeFunc" : completeFunc
+        "completeFunc" : function() {
+            // TODO: maybe this should be more of a 'game object' that has a 'close' function, rather than straight dom ...
+            objectiveMessage.children(".close").click();
+            successFunc();
+        }
     });
 
     // TOOD: ID'ing this way is going to cause problems ... need a global objective ID, not an order ...
@@ -26,8 +31,7 @@ Monolith.Objective.Add = function(message, displayFunc, criteriaFunc, completeFu
 Monolith.Objective.AddStructureBasedObjective = function(structure, quantity, message, successFunc) {
 
     message = message.replace('<i {structure} />', '<i class="fa ' + structure["ui-class"] + '" />');
-    // TODO: assign the message to a variable that can be cleared when the objective is completed
-    Monolith.UI.Message(message);
+    var objectiveMessage = Monolith.UI.Message(message);
     
     Monolith.Objective.Add(
         message,
@@ -43,10 +47,10 @@ Monolith.Objective.AddStructureBasedObjective = function(structure, quantity, me
 Monolith.Objective.AddResourceBasedObjective = function(resource, quantity, message, successFunc) {
 
     message = message.replace('<i {resource} />', '<i class="fa ' + resource["ui-class"] + '" />');
-    Monolith.UI.Message(message);
+    var objectiveMessage = Monolith.UI.Message(message);
 
     Monolith.Objective.Add(
-        message,
+        objectiveMessage,
         function() { 
             return Monolith.Resources.Get(resource.name) + ' / ' + quantity + 
             ' <i class=\"fa ' + structure["ui-class"] + '\"/>';
@@ -56,7 +60,25 @@ Monolith.Objective.AddResourceBasedObjective = function(resource, quantity, mess
     );    
 }
 
-function addStairsObjective() {
+// TODO: solidify namespacing scheme
+Monolith.Objectives.addWorkforceObjective = function() {
+    var popToSupport = 40;
+	
+	var message = 'You will need a workforce. Build enough <i class="fa ' 
+		+ Monolith.AllBuildables.Habitat["ui-class"] 
+		+ '"/> to support ' + popToSupport + ' <i class="fa ' + Monolith.Resources["population"].Icon + '"/>';
+	var objectiveMessage = Monolith.UI.Message(message);
+
+	// still have to call this here because it's using max, not actual value
+	Monolith.Objective.Add(
+		objectiveMessage,
+		function() { return Monolith.Player.Resources.population.max() + ' / ' + popToSupport + ' <i class=\"fa ' + Monolith.Resources["population"].Icon + '\"/>'; },
+		function() { return Monolith.Player.Resources.population.max() >= popToSupport; },
+		Monolith.Objectives.addStairsObjective
+	);
+}
+
+Monolith.Objectives.addStairsObjective = function() {
     
     Monolith.Objective.AddStructureBasedObjective(
         Monolith.AllBuildables.Stairs,
