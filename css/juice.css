@@ -31,6 +31,8 @@ body.animated {
     border-radius: 15px;
     vertical-align: top;
     opacity: 0;
+    display: inline-block;
+    margin-bottom: 10px;
 	
 	transition: 2s opacity linear;
 }
