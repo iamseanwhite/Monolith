@@ -25,6 +25,18 @@ Monolith.Objective.Add = function(objectiveMessage, displayFunc, criteriaFunc, c
     
     jQuery("#ui-objectives .objective").fadeIn(1000);
 
+    var lastObjective = jQuery("#ui-objectives .objective").last();
+
+    jQuery(lastObjective).hover(
+        function() {
+            Monolith.UI.Hint('objective' + objectiveId,
+            objectiveMessage.html());
+        },
+        function() {
+            Monolith.UI.ClearHint('objective' + objectiveId);
+        }
+    );
+
     return objectiveId;
 }
 

@@ -179,3 +179,11 @@
 .menu.bottom div.description {
 	display: none !important;
 }
+
+#message-overlay {
+	pointer-events: none;
+}
+
+#message-overlay .close {
+	pointer-events: auto;
+}
